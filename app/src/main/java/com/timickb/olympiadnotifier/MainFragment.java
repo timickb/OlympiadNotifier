@@ -12,9 +12,7 @@ public class MainFragment extends Fragment {
     Button applyBtn;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        applyBtn = (Button) getView().findViewById(R.id.applyBtn);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
 }
