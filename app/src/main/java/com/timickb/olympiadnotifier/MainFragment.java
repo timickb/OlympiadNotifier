@@ -15,7 +15,6 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         applyBtn = (Button) getView().findViewById(R.id.applyBtn);
-        applyBtn.
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
 }
