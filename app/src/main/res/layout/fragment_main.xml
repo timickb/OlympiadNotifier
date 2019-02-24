@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainFragment">
+
+    <View
+        android:id="@+id/filtersView"
+        android:layout_width="0dp"
+        android:layout_height="175dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:elevation="5dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/subjectChooser"
+        android:layout_width="187dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="60dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintStart_toStartOf="@+id/filtersView"
+        app:layout_constraintTop_toTopOf="@+id/filtersView" />
+
+    <ImageView
+        android:id="@+id/filtersImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_filter"
+        app:layout_constraintStart_toStartOf="@+id/filtersView"
+        app:layout_constraintTop_toTopOf="@+id/filtersView" />
+
+    <Spinner
+        android:id="@+id/monthChooser"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="100dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintStart_toStartOf="@+id/filtersView"
+        app:layout_constraintTop_toTopOf="@+id/filtersView" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="89dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/filters"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        app:layout_constraintStart_toEndOf="@+id/filtersImage"
+        app:layout_constraintTop_toTopOf="@+id/filtersView" />
+
+    <Button
+        android:id="@+id/applyBtn"
+        style="@style/WhiteButton"
+        android:layout_width="127dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/apply"
+        app:layout_constraintBottom_toBottomOf="@+id/filtersView"
+        app:layout_constraintEnd_toEndOf="@+id/filtersView" />
+
+    <Spinner
+        android:id="@+id/classChooser"
+        android:layout_width="119dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="60dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintStart_toStartOf="@+id/filtersView"
+        app:layout_constraintTop_toTopOf="@+id/filtersView" />
+
+</android.support.constraint.ConstraintLayout>
