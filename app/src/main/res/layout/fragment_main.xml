@@ -21,16 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/subjectChooser"
-        android:layout_width="187dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="60dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintStart_toStartOf="@+id/filtersView"
-        app:layout_constraintTop_toTopOf="@+id/filtersView" />
-
     <ImageView
         android:id="@+id/filtersImage"
         android:layout_width="wrap_content"
@@ -75,9 +65,19 @@
 
     <Spinner
         android:id="@+id/classChooser"
-        android:layout_width="119dp"
+        android:layout_width="149dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="60dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintStart_toStartOf="@+id/filtersView"
+        app:layout_constraintTop_toTopOf="@+id/filtersView" />
+
+    <Spinner
+        android:id="@+id/subjectChooser"
+        android:layout_width="187dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="172dp"
         android:layout_marginTop="60dp"
         android:spinnerMode="dropdown"
         app:layout_constraintStart_toStartOf="@+id/filtersView"

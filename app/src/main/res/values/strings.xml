@@ -12,6 +12,73 @@
     <string name="settings_title">Настройки</string>
     <string name="info_title">О приложении</string>
     <string name="olympiad_title">Об олимпиаде</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="all_subj">Все предметы</string>
+    <string name="math_subj">Математика</string>
+    <string name="russian_subj">Русский язык</string>
+    <string name="informatics_subj">Информатика</string>
+    <string name="physics_subj">Физика</string>
+    <string name="chemistry_subj">Химия</string>
+    <string name="biology_subj">Биология</string>
+    <string name="social_subj">Обществознание</string>
+    <string name="literature_subj">Литература</string>
+    <string name="geography_subj">География</string>
+    <string name="foreign_subj">Иностранный язык</string>
+    <string name="art_subj">Искусство</string>
+    <string name="economy_subj">Экономика</string>
+
+    <string name="all_months">Все месяцы</string>
+    <string name="january">Январь</string>
+    <string name="february">Февраль</string>
+    <string name="march">Март</string>
+    <string name="april">Апрель</string>
+    <string name="may">Май</string>
+    <string name="june">Июнь</string>
+    <string name="july">Июль</string>
+    <string name="august">Август</string>
+    <string name="september">Сентябрь</string>
+    <string name="october">Октябрь</string>
+    <string name="november">Ноябрь</string>
+    <string name="december">Декабрь</string>
+
+    <string-array name="classes">
+        <item>5 класс</item>
+        <item>6 класс</item>
+        <item>7 класс</item>
+        <item>8 класс</item>
+        <item>9 класс</item>
+        <item>10 класс</item>
+        <item>11 класс</item>
+    </string-array>
+    <string-array name="subjects">
+        <item>@string/all_subj</item>
+        <item>@string/math_subj</item>
+        <item>@string/russian_subj</item>
+        <item>@string/informatics_subj</item>
+        <item>@string/physics_subj</item>
+        <item>@string/chemistry_subj</item>
+        <item>@string/biology_subj</item>
+        <item>@string/social_subj</item>
+        <item>@string/literature_subj</item>
+        <item>@string/geography_subj</item>
+        <item>@string/foreign_subj</item>
+        <item>@string/art_subj</item>
+        <item>@string/economy_subj</item>
+    </string-array>
+    <string-array name="months">
+        <item>@string/all_months</item>
+        <item>@string/january</item>
+        <item>@string/february</item>
+        <item>@string/march</item>
+        <item>@string/april</item>
+        <item>@string/may</item>
+        <item>@string/june</item>
+        <item>@string/july</item>
+        <item>@string/august</item>
+        <item>@string/september</item>
+        <item>@string/october</item>
+        <item>@string/november</item>
+        <item>@string/december</item>
+    </string-array>
+
 </resources>
