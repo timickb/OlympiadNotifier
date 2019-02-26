@@ -1,5 +1,8 @@
 package com.timickb.olympiadnotifier;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,24 +11,64 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainFragment extends Fragment implements View.OnClickListener {
 
+    private Retrofit retrofit;
+    private API client;
     private Button applyBtn;
     private Spinner classChooser, subjectChooser, monthChooser;
+    private ListView olympiadListView;
     private Map<String, String> filtersDict = new HashMap<String, String>();
+    private List<Olympiad> olympiadList;
+
+    public static boolean hasConnection(final Context context)
+    {
+        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifiInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if (wifiInfo != null && wifiInfo.isConnected())
+        {
+            return true;
+        }
+        wifiInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (wifiInfo != null && wifiInfo.isConnected())
+        {
+            return true;
+        }
+        wifiInfo = cm.getActiveNetworkInfo();
+        if (wifiInfo != null && wifiInfo.isConnected())
+        {
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+        // initialize retrofit
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl(getString(R.string.server_url))
+                .addConverterFactory(GsonConverterFactory.create());
+        retrofit = builder.build();
+        client = retrofit.create(API.class);
+
         // initialize filters dict
         filtersDict.put("class", "5");
         filtersDict.put("subject", "-1");
-        filtersDict.put("month", "-1");
+        filtersDict.put("date", "-1");
 
         classChooser = (Spinner) view.findViewById(R.id.classChooser);
         subjectChooser = (Spinner) view.findViewById(R.id.subjectChooser);
@@ -100,7 +143,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                 else if(item_raw == getString(R.string.november)) item="10";
                 else if(item_raw == getString(R.string.december)) item="11";
 
-                filtersDict.put("month", item);
+                filtersDict.put("date", item);
             }
 
             @Override
@@ -111,11 +154,63 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         applyBtn = view.findViewById(R.id.applyBtn);
         applyBtn.setOnClickListener(this);
 
+        // make default query
+        String class_ = filtersDict.get("class");
+        String subject = filtersDict.get("subject");
+        String date = filtersDict.get("date");
+
+        Call<List<Olympiad>> call = client.getOlympiads(class_, subject, date);
+
+        call.enqueue(new Callback<List<Olympiad>>() {
+            @Override
+            public void onResponse(Call<List<Olympiad>> call, Response<List<Olympiad>> response) {
+                olympiadList = response.body();
+                updateOlympiadList();
+            }
+
+            @Override
+            public void onFailure(Call<List<Olympiad>> call, Throwable t) {
+                Toast.makeText(getContext(), R.string.error_occured, Toast.LENGTH_SHORT).show();
+                System.out.println(t.getMessage());
+            }
+        });
+
+        // make a view
+        //olympiadListView = view.findViewById(R.id.olympiadsList);
+
         return view;
     }
 
     @Override
     public void onClick(View v) {
+        if(!hasConnection(getContext())) {
+            Toast.makeText(getContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String class_ = filtersDict.get("class");
+        String subject = filtersDict.get("subject");
+        String date = filtersDict.get("date");
+
+        Call<List<Olympiad>> call = client.getOlympiads(class_, subject, date);
+
+        call.enqueue(new Callback<List<Olympiad>>() {
+            @Override
+            public void onResponse(Call<List<Olympiad>> call, Response<List<Olympiad>> response) {
+                olympiadList = response.body();
+                updateOlympiadList();
+            }
+
+            @Override
+            public void onFailure(Call<List<Olympiad>> call, Throwable t) {
+                Toast.makeText(getContext(), R.string.error_occured, Toast.LENGTH_SHORT).show();
+                System.out.println(t.getMessage());
+            }
+        });
+
+
+    }
+    public void updateOlympiadList() {
 
     }
 }

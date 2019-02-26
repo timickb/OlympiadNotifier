@@ -19,6 +19,7 @@
 
     <style name="WhiteButton" parent="Base.Widget.AppCompat.Button.Borderless">
         <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:background">@android:color/white</item>
         <item name="android:elevation">2dp</item>
     </style>
 

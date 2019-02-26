@@ -1,4 +1,6 @@
 <resources>
+    <string name="server_url">http://94.103.83.68/</string>
+
     <string name="app_name">Olympiad Notifier</string>
     <string name="navigation_drawer_open">Открыть меню</string>
     <string name="navigation_drawer_close">Закрыть меню</string>
@@ -12,6 +14,7 @@
     <string name="settings_title">Настройки</string>
     <string name="info_title">О приложении</string>
     <string name="olympiad_title">Об олимпиаде</string>
+    <string name="more_info">Подробнее</string>
 
     <string name="all_subj">Все предметы</string>
     <string name="math_subj">Математика</string>
@@ -40,6 +43,9 @@
     <string name="october">Октябрь</string>
     <string name="november">Ноябрь</string>
     <string name="december">Декабрь</string>
+
+    <string name="no_internet">Нет подключения к сети</string>
+    <string name="error_occured">Произошла ошибка</string>
 
     <string-array name="classes">
         <item>5 класс</item>
