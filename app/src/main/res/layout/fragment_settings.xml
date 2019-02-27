@@ -113,18 +113,16 @@
 
         <TextView
             android:id="@+id/textView12"
-            android:layout_width="261dp"
+            android:layout_width="185dp"
             android:layout_height="21dp"
             android:text="Тема"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             tools:layout_editor_absoluteX="67dp"
             tools:layout_editor_absoluteY="237dp" />
 
-        <Spinner
-            android:id="@+id/themeChooser"
+        <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

@@ -1,7 +1,7 @@
 <resources>
     <string name="server_url">http://94.103.83.68/</string>
 
-    <string name="app_name">Olympiad Notifier</string>
+    <string name="app_name">Olympiad Tracker</string>
     <string name="navigation_drawer_open">Открыть меню</string>
     <string name="navigation_drawer_close">Закрыть меню</string>
     <string name="nav_header_title">Android Studio</string>
@@ -19,6 +19,7 @@
     <string name="settings_class">Класс</string>
     <string name="settings_subjects">Интересующие предметы</string>
     <string name="settings_theme">Тема</string>
+    <string name="organizers_header">Организаторы:</string>
 
     <string name="all_subj">Все предметы</string>
     <string name="math_subj">Математика</string>
@@ -50,6 +51,7 @@
 
     <string name="no_internet">Нет подключения к сети</string>
     <string name="error_occured">Произошла ошибка</string>
+    <string name="nothing_found">Олимпиады не найдены</string>
 
     <string-array name="classes">
         <item>5 класс</item>

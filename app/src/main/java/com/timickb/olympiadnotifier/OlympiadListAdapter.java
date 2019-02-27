@@ -42,14 +42,17 @@ public class OlympiadListAdapter extends BaseAdapter {
         String title = currentItem.getTitle();
         String classes = Tools.getStringFromClasses(currentItem.getClasses());
         String subjects = Tools.getStringFromSubjects(currentItem.getSubjects());
+        String date = Tools.getStringFromMonths(currentItem.getDateStart(), currentItem.getDateEnd());
 
         TextView olympiadTitle = v.findViewById(R.id.olympiadTitle);
         TextView olympiadInfoSubjects = v.findViewById(R.id.olympiadInfoSubjects);
         TextView olympiadInfoClasses = v.findViewById(R.id.olympiadInfoClasses);
+        TextView olympiadInfoDate = v.findViewById(R.id.olympiadInfoDate);
 
         olympiadTitle.setText(title);
         olympiadInfoSubjects.setText(subjects);
         olympiadInfoClasses.setText(classes);
+        olympiadInfoDate.setText(date);
         return v;
     }
 }

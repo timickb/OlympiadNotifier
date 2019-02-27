@@ -18,6 +18,18 @@ public class Olympiad {
     @Expose
     private ArrayList<String> classes;
 
+    @SerializedName("date_start")
+    @Expose
+    private String dateStart;
+
+    @SerializedName("date_end")
+    @Expose
+    private String dateEnd;
+
+    @SerializedName("orgs")
+    @Expose
+    private ArrayList<String> organizers;
+
     public String getTitle() {
         return title;
     }
@@ -40,5 +52,29 @@ public class Olympiad {
 
     public void setClasses(ArrayList<String> classes) {
         this.classes = classes;
+    }
+
+    public String getDateStart() {
+        return dateStart;
+    }
+
+    public void setDateStart(String dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public String getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(String dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+    public ArrayList<String> getOrganizers() {
+        return organizers;
+    }
+
+    public void setOrganizers(ArrayList<String> organizers) {
+        this.organizers = organizers;
     }
 }

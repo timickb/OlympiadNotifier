@@ -179,8 +179,11 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                         OlympiadFragment newFragment = new OlympiadFragment();
                         Bundle args = new Bundle();
                         args.putString("title", olympiad.getTitle());
+                        args.putString("date_start", olympiad.getDateStart());
+                        args.putString("date_end", olympiad.getDateEnd());
                         args.putStringArrayList("classes", olympiad.getClasses());
                         args.putStringArrayList("subjects", olympiad.getSubjects());
+                        args.putStringArrayList("organizers", olympiad.getOrganizers());
                         newFragment.setArguments(args);
 
                         FragmentTransaction fr = getFragmentManager().beginTransaction();
@@ -192,7 +195,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onFailure(Call<List<Olympiad>> call, Throwable t) {
-                Toast.makeText(getContext(), R.string.error_occured, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.nothing_found, Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
             }
         });
@@ -226,7 +229,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onFailure(Call<List<Olympiad>> call, Throwable t) {
-                Toast.makeText(getContext(), R.string.error_occured, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.nothing_found, Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
             }
         });

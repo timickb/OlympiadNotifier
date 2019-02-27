@@ -20,4 +20,18 @@ public class Tools {
         }
         return subjects;
     }
+
+    public static String getStringFromMonths(String start, String end) {
+        return start + " - " + end;
+    }
+
+    public static String getStringFromOrganizers(List<String> orgs) {
+        String result = new String();
+
+        for(String org: orgs) {
+            result += org;
+            if(orgs.get(orgs.size()-1) != org) result += ", ";
+        }
+        return result;
+    }
 }
