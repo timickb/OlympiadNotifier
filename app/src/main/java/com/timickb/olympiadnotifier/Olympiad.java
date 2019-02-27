@@ -16,7 +16,7 @@ public class Olympiad {
 
     @SerializedName("classes")
     @Expose
-    private ArrayList<Integer> classes;
+    private ArrayList<String> classes;
 
     public String getTitle() {
         return title;
@@ -26,7 +26,7 @@ public class Olympiad {
         return subjects;
     }
 
-    public ArrayList<Integer> getClasses() {
+    public ArrayList<String> getClasses() {
         return classes;
     }
 
@@ -38,7 +38,7 @@ public class Olympiad {
         this.subjects = subjects;
     }
 
-    public void setClasses(ArrayList<Integer> classes) {
+    public void setClasses(ArrayList<String> classes) {
         this.classes = classes;
     }
 }

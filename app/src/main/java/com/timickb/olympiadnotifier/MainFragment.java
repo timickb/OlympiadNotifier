@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,11 +28,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainFragment extends Fragment implements View.OnClickListener {
 
+    private View view;
     private Retrofit retrofit;
     private API client;
     private Button applyBtn;
     private Spinner classChooser, subjectChooser, monthChooser;
     private ListView olympiadListView;
+    private OlympiadListAdapter adapter;
     private Map<String, String> filtersDict = new HashMap<String, String>();
     private List<Olympiad> olympiadList;
 
@@ -58,7 +61,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        view = inflater.inflate(R.layout.fragment_main, container, false);
         // initialize retrofit
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl(getString(R.string.server_url))
                 .addConverterFactory(GsonConverterFactory.create());
@@ -165,7 +168,15 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onResponse(Call<List<Olympiad>> call, Response<List<Olympiad>> response) {
                 olympiadList = response.body();
-                updateOlympiadList();
+                olympiadListView = view.findViewById(R.id.olympiadsList);
+                adapter = new OlympiadListAdapter(getContext(), olympiadList);
+                olympiadListView.setAdapter(adapter);
+                olympiadListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Toast.makeText(getContext(), "Clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
@@ -175,8 +186,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        // make a view
-        //olympiadListView = view.findViewById(R.id.olympiadsList);
 
         return view;
     }
@@ -198,7 +207,10 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onResponse(Call<List<Olympiad>> call, Response<List<Olympiad>> response) {
                 olympiadList = response.body();
-                updateOlympiadList();
+                olympiadList = response.body();
+                olympiadListView = view.findViewById(R.id.olympiadsList);
+                adapter = new OlympiadListAdapter(getContext(), olympiadList);
+                olympiadListView.setAdapter(adapter);
             }
 
             @Override
