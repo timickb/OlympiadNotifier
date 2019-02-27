@@ -5,146 +5,127 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingsFragment">
+    tools:context=".SettingsFragment"
+    tools:layout_editor_absoluteY="81dp">
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="73dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="8dp"
-        android:text="Тема"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        app:layout_constraintBottom_toBottomOf="@+id/section4"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/section4"
-        app:layout_constraintVertical_bias="0.45" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="249dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="8dp"
-        android:text="Время получения уведомлений о новых олимпиадах"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        app:layout_constraintBottom_toBottomOf="@+id/section3"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/section3"
-        app:layout_constraintVertical_bias="0.325" />
-
-    <View
-        android:id="@+id/section1"
-        android:layout_width="395dp"
-        android:layout_height="47dp"
+    <LinearLayout
+        android:id="@+id/classLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:elevation="12dp"
-        android:translationX="0dp"
-        android:translationY="0dp"
-        android:translationZ="0dp"
+        android:elevation="3dp"
+        android:orientation="horizontal"
+        android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <View
-        android:id="@+id/section2"
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_book_black"
+            tools:layout_editor_absoluteX="60dp"
+            tools:layout_editor_absoluteY="136dp" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="261dp"
+            android:layout_height="wrap_content"
+            android:text="Класс"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            tools:layout_editor_absoluteX="110dp"
+            tools:layout_editor_absoluteY="172dp" />
+
+        <Spinner
+            android:id="@+id/classChooser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/subjectsLayout"
         android:layout_width="395dp"
-        android:layout_height="114dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
+        android:elevation="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/section1" />
+        app:layout_constraintTop_toBottomOf="@+id/themeLayout">
 
-    <View
-        android:id="@+id/section3"
-        android:layout_width="395dp"
-        android:layout_height="94dp"
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_school"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="202dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Интересующие предметы"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/themeLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        android:elevation="3dp"
+        android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/section2" />
+        app:layout_constraintTop_toBottomOf="@+id/classLayout">
 
-    <View
-        android:id="@+id/section4"
-        android:layout_width="395dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/section3" />
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_palette"
+            tools:layout_editor_absoluteX="28dp"
+            tools:layout_editor_absoluteY="235dp" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:src="@drawable/ic_book_black"
-        app:layout_constraintBottom_toBottomOf="@+id/section1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/section1" />
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="261dp"
+            android:layout_height="21dp"
+            android:text="Тема"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            tools:layout_editor_absoluteX="67dp"
+            tools:layout_editor_absoluteY="237dp" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:src="@drawable/ic_school"
-        app:layout_constraintBottom_toBottomOf="@+id/section2"
-        app:layout_constraintStart_toStartOf="@+id/section2"
-        app:layout_constraintTop_toTopOf="@+id/section2"
-        app:layout_constraintVertical_bias="0.2" />
+        <Spinner
+            android:id="@+id/themeChooser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:src="@drawable/ic_access_time"
-        app:layout_constraintBottom_toBottomOf="@+id/section3"
-        app:layout_constraintStart_toStartOf="@+id/section3"
-        app:layout_constraintTop_toTopOf="@+id/section3"
-        app:layout_constraintVertical_bias="0.2" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:src="@drawable/ic_palette"
-        app:layout_constraintBottom_toBottomOf="@+id/section4"
-        app:layout_constraintStart_toStartOf="@+id/section4"
-        app:layout_constraintTop_toTopOf="@+id/section4"
-        app:layout_constraintVertical_bias="0.529" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="87dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="8dp"
-        android:text="Класс"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        app:layout_constraintBottom_toBottomOf="@+id/section1"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/section1" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="308dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:text="Интересующие предметы"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        app:layout_constraintBottom_toBottomOf="@+id/section2"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/section2"
-        app:layout_constraintVertical_bias="0.214" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

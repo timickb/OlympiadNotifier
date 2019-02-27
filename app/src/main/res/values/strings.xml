@@ -15,6 +15,10 @@
     <string name="info_title">О приложении</string>
     <string name="olympiad_title">Об олимпиаде</string>
     <string name="more_info">Подробнее</string>
+    <string name="create_notify">Создать напоминание для этого события</string>
+    <string name="settings_class">Класс</string>
+    <string name="settings_subjects">Интересующие предметы</string>
+    <string name="settings_theme">Тема</string>
 
     <string name="all_subj">Все предметы</string>
     <string name="math_subj">Математика</string>
@@ -86,5 +90,8 @@
         <item>@string/november</item>
         <item>@string/december</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

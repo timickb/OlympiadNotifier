@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -174,7 +175,17 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                 olympiadListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Toast.makeText(getContext(), "Clicked", Toast.LENGTH_SHORT).show();
+                        Olympiad olympiad = olympiadList.get(position);
+                        OlympiadFragment newFragment = new OlympiadFragment();
+                        Bundle args = new Bundle();
+                        args.putString("title", olympiad.getTitle());
+                        args.putStringArrayList("classes", olympiad.getClasses());
+                        args.putStringArrayList("subjects", olympiad.getSubjects());
+                        newFragment.setArguments(args);
+
+                        FragmentTransaction fr = getFragmentManager().beginTransaction();
+                        fr.replace(R.id.fragment, newFragment);
+                        fr.commit();
                     }
                 });
             }

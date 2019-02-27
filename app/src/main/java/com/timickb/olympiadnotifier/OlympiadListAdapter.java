@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -37,13 +36,20 @@ public class OlympiadListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = View.inflate(mContext, R.layout.olympiad_item, null);
+
         Olympiad currentItem = mOlympiadList.get(position);
+
+        String title = currentItem.getTitle();
+        String classes = Tools.getStringFromClasses(currentItem.getClasses());
+        String subjects = Tools.getStringFromSubjects(currentItem.getSubjects());
+
         TextView olympiadTitle = v.findViewById(R.id.olympiadTitle);
-        TextView olympiadInfo = v.findViewById(R.id.olympiadInfo);
-        TextView olympiadInfo2 = v.findViewById(R.id.olympiadInfo2);
-        olympiadTitle.setText(mOlympiadList.get(position).getTitle());
-        olympiadInfo.setText(mOlympiadList.get(position).getSubjects().get(0));
-        olympiadInfo2.setText(mOlympiadList.get(position).getClasses().get(0));
+        TextView olympiadInfoSubjects = v.findViewById(R.id.olympiadInfoSubjects);
+        TextView olympiadInfoClasses = v.findViewById(R.id.olympiadInfoClasses);
+
+        olympiadTitle.setText(title);
+        olympiadInfoSubjects.setText(subjects);
+        olympiadInfoClasses.setText(classes);
         return v;
     }
 }
