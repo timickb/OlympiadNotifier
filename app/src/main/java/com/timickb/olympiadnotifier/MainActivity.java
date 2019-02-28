@@ -1,5 +1,6 @@
 package com.timickb.olympiadnotifier;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
@@ -14,13 +15,22 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    Button applySearchBtn;
+    private Button applySearchBtn;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.fragment_main);
         setContentView(R.layout.activity_main);
+
+        prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        boolean isDark = prefs.getBoolean("theme", false);
+        System.out.println(isDark);
+        if(prefs.getBoolean("theme", false)) {
+            setTheme(android.R.style.ThemeOverlay_Material_Dark);
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

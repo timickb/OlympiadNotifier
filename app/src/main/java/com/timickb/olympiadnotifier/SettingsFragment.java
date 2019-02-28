@@ -10,28 +10,37 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import static android.content.Context.MODE_PRIVATE;
 
 
 public class SettingsFragment extends Fragment {
     private Spinner classChooser;
+    private Switch themeSwitch;
+    private SharedPreferences prefs;
     private View view;
+    private boolean darkTheme;
+    private String userClass;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_settings, container, false);
+        prefs = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+        darkTheme = prefs.getBoolean("theme", false);
+        userClass = prefs.getString("class", "7");
 
         classChooser = view.findViewById(R.id.userClassChooser);
         ArrayAdapter<CharSequence> classAdapter = ArrayAdapter.createFromResource(getContext(), R.array.classes, android.R.layout.simple_spinner_item);
         classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         classChooser.setAdapter(classAdapter);
+        classChooser.setSelection(Integer.parseInt(userClass)-5);
         classChooser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String text = parent.getSelectedItem().toString();
                 String class_ = text.split(" ")[0];
-                SharedPreferences prefs = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("class", class_);
                 editor.commit();
@@ -39,6 +48,17 @@ public class SettingsFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        themeSwitch = view.findViewById(R.id.themeSwitch);
+        themeSwitch.setChecked(darkTheme);
+        themeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putBoolean("theme", isChecked);
+                    editor.commit();
+            }
         });
 
         return view;
