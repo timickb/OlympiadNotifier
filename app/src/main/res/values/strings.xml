@@ -20,6 +20,8 @@
     <string name="settings_subjects">Интересующие предметы</string>
     <string name="settings_theme">Тема</string>
     <string name="organizers_header">Организаторы:</string>
+    <string name="option_default_theme">Стандартная</string>
+    <string name="option_dark_theme">Темная</string>
 
     <string name="all_subj">Все предметы</string>
     <string name="math_subj">Математика</string>

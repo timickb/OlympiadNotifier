@@ -13,12 +13,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:elevation="3dp"
+        android:elevation="6dp"
         android:orientation="horizontal"
         android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -32,7 +33,7 @@
 
         <TextView
             android:id="@+id/textView8"
-            android:layout_width="261dp"
+            android:layout_width="208dp"
             android:layout_height="wrap_content"
             android:text="Класс"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
@@ -40,7 +41,7 @@
             tools:layout_editor_absoluteY="172dp" />
 
         <Spinner
-            android:id="@+id/classChooser"
+            android:id="@+id/userClassChooser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -54,7 +55,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        android:elevation="3dp"
+        android:elevation="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,12 +92,12 @@
     <LinearLayout
         android:id="@+id/themeLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
+        android:elevation="6dp"
         android:orientation="horizontal"
-        android:elevation="3dp"
         android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -113,16 +114,12 @@
 
         <TextView
             android:id="@+id/textView12"
-            android:layout_width="185dp"
+            android:layout_width="67dp"
             android:layout_height="21dp"
             android:text="Тема"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             tools:layout_editor_absoluteX="67dp"
             tools:layout_editor_absoluteY="237dp" />
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
     </LinearLayout>
 
