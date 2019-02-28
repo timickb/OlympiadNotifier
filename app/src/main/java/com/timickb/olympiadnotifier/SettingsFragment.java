@@ -1,6 +1,7 @@
 package com.timickb.olympiadnotifier;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class SettingsFragment extends Fragment {
@@ -26,7 +29,12 @@ public class SettingsFragment extends Fragment {
         classChooser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //magic...
+                String text = parent.getSelectedItem().toString();
+                String class_ = text.split(" ")[0];
+                SharedPreferences prefs = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("class", class_);
+                editor.commit();
             }
 
             @Override

@@ -33,7 +33,12 @@ public class OlympiadFragment extends Fragment {
         String classes = Tools.getStringFromClasses(getArguments().getStringArrayList("classes"));
         String subjects = Tools.getStringFromSubjects(getArguments().getStringArrayList("subjects"));
         String date = Tools.getStringFromMonths(getArguments().getString("date_start"), getArguments().getString("date_end"));
-        String organizers = Tools.getStringFromOrganizers(getArguments().getStringArrayList("organizers"));
+        String organizers = new String();
+        if(getArguments().getStringArrayList("organizers").size() == 0) {
+            organizers = getString(R.string.unknown);
+        } else {
+            organizers = Tools.getStringFromOrganizers(getArguments().getStringArrayList("organizers"));
+        }
 
         olTitle.setText(title);
         subjectsInfo.setText(subjects);

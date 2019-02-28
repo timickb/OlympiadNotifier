@@ -1,6 +1,7 @@
 package com.timickb.olympiadnotifier;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -38,6 +39,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     private OlympiadListAdapter adapter;
     private Map<String, String> filtersDict = new HashMap<String, String>();
     private List<Olympiad> olympiadList;
+    private SharedPreferences prefs;
+    private String userClass;
 
     public static boolean hasConnection(final Context context)
     {
@@ -63,6 +66,10 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_main, container, false);
+        // initialize settings
+        prefs = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+        // read user settings
+        userClass = prefs.getString("class", "7");
         // initialize retrofit
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl(getString(R.string.server_url))
                 .addConverterFactory(GsonConverterFactory.create());
@@ -70,7 +77,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         client = retrofit.create(API.class);
 
         // initialize filters dict
-        filtersDict.put("class", "5");
+        filtersDict.put("class", userClass);
         filtersDict.put("subject", "-1");
         filtersDict.put("date", "-1");
 
@@ -82,6 +89,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         ArrayAdapter<CharSequence> classAdapter = ArrayAdapter.createFromResource(getContext(), R.array.classes, android.R.layout.simple_spinner_item);
         classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         classChooser.setAdapter(classAdapter);
+        classChooser.setSelection(Integer.parseInt(userClass)-5);
         classChooser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
