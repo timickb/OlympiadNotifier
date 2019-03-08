@@ -192,6 +192,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                         args.putStringArrayList("classes", olympiad.getClasses());
                         args.putStringArrayList("subjects", olympiad.getSubjects());
                         args.putStringArrayList("organizers", olympiad.getOrganizers());
+                        args.putString("link", olympiad.getLink());
                         newFragment.setArguments(args);
 
                         FragmentTransaction fr = getFragmentManager().beginTransaction();

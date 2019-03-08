@@ -26,6 +26,10 @@ public class Olympiad {
     @Expose
     private String dateEnd;
 
+    @SerializedName("link")
+    @Expose
+    private String link;
+
     @SerializedName("orgs")
     @Expose
     private ArrayList<String> organizers;
@@ -76,5 +80,13 @@ public class Olympiad {
 
     public void setOrganizers(ArrayList<String> organizers) {
         this.organizers = organizers;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 }
