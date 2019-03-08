@@ -11,12 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private Button applySearchBtn;
-    private SharedPreferences prefs;
+    private SharedPreferences settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +21,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.setContentView(R.layout.fragment_main);
         setContentView(R.layout.activity_main);
 
-        prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-        boolean isDark = prefs.getBoolean("theme", false);
-        System.out.println(isDark);
-        if(prefs.getBoolean("theme", false)) {
-            setTheme(android.R.style.ThemeOverlay_Material_Dark);
-        }
+        settings = getSharedPreferences("prefs", MODE_PRIVATE);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

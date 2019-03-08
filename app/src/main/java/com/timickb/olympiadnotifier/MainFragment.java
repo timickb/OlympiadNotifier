@@ -39,7 +39,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     private OlympiadListAdapter adapter;
     private Map<String, String> filtersDict = new HashMap<String, String>();
     private List<Olympiad> olympiadList;
-    private SharedPreferences prefs;
+    private SharedPreferences settings;
     private String userClass;
 
     public static boolean hasConnection(final Context context)
@@ -67,9 +67,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_main, container, false);
         // initialize settings
-        prefs = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+        settings = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
         // read user settings
-        userClass = prefs.getString("class", "7");
+        userClass = settings.getString("class", "7");
         // initialize retrofit
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl(getString(R.string.server_url))
                 .addConverterFactory(GsonConverterFactory.create());
@@ -142,18 +142,18 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                 String item_raw = parent.getSelectedItem().toString();
                 String item = "-1";
 
-                if(item_raw == getString(R.string.january)) item="0";
-                else if(item_raw == getString(R.string.february)) item="1";
-                else if(item_raw == getString(R.string.march)) item="2";
-                else if(item_raw == getString(R.string.april)) item="3";
-                else if(item_raw == getString(R.string.may)) item="4";
-                else if(item_raw == getString(R.string.june)) item="5";
-                else if(item_raw == getString(R.string.july)) item="6";
-                else if(item_raw == getString(R.string.august)) item="7";
-                else if(item_raw == getString(R.string.september)) item="8";
-                else if(item_raw == getString(R.string.october)) item="9";
-                else if(item_raw == getString(R.string.november)) item="10";
-                else if(item_raw == getString(R.string.december)) item="11";
+                if(item_raw == getString(R.string.january)) item="january";
+                else if(item_raw == getString(R.string.february)) item="february";
+                else if(item_raw == getString(R.string.march)) item="march";
+                else if(item_raw == getString(R.string.april)) item="april";
+                else if(item_raw == getString(R.string.may)) item="may";
+                else if(item_raw == getString(R.string.june)) item="june";
+                else if(item_raw == getString(R.string.july)) item="july";
+                else if(item_raw == getString(R.string.august)) item="august";
+                else if(item_raw == getString(R.string.september)) item="september";
+                else if(item_raw == getString(R.string.october)) item="october";
+                else if(item_raw == getString(R.string.november)) item="november";
+                else if(item_raw == getString(R.string.december)) item="december";
 
                 filtersDict.put("date", item);
             }
