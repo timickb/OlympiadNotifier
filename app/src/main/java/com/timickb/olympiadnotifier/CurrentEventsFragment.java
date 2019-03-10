@@ -36,9 +36,9 @@ public class CurrentEventsFragment extends Fragment implements View.OnClickListe
     private Button applyBtn;
     private Spinner classChooser, subjectChooser;
     private ListView olympiadListView;
-    private CurrentOlympiadListAdapter adapter;
+    private OlympiadListAdapter adapter;
     private Map<String, String> filtersDict = new HashMap<String, String>();
-    private List<CurrentOlympiad> olympiadList;
+    private List<Olympiad> olympiadList;
     private SharedPreferences settings;
     private String userClass;
 
@@ -116,19 +116,19 @@ public class CurrentEventsFragment extends Fragment implements View.OnClickListe
         String class_ = filtersDict.get("class");
         String subject = filtersDict.get("subject");
 
-        Call<List<CurrentOlympiad>> call = client.getCurrentEvents(class_, subject);
+        Call<List<Olympiad>> call = client.getCurrentEvents(class_, subject);
 
-        call.enqueue(new Callback<List<CurrentOlympiad>>() {
+        call.enqueue(new Callback<List<Olympiad>>() {
             @Override
-            public void onResponse(Call<List<CurrentOlympiad>> call, Response<List<CurrentOlympiad>> response) {
+            public void onResponse(Call<List<Olympiad>> call, Response<List<Olympiad>> response) {
                 olympiadList = response.body();
                 olympiadListView = view.findViewById(R.id.currentList);
-                adapter = new CurrentOlympiadListAdapter(getContext(), olympiadList);
+                adapter = new OlympiadListAdapter(getContext(), olympiadList);
                 olympiadListView.setAdapter(adapter);
                 olympiadListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        CurrentOlympiad olympiad = olympiadList.get(position);
+                        Olympiad olympiad = olympiadList.get(position);
                         OlympiadFragment newFragment = new OlympiadFragment();
                         Bundle args = new Bundle();
                         args.putString("title", olympiad.getTitle());
@@ -147,7 +147,7 @@ public class CurrentEventsFragment extends Fragment implements View.OnClickListe
             }
 
             @Override
-            public void onFailure(Call<List<CurrentOlympiad>> call, Throwable t) {
+            public void onFailure(Call<List<Olympiad>> call, Throwable t) {
                 Toast.makeText(getContext(), R.string.nothing_found, Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
             }
@@ -167,20 +167,20 @@ public class CurrentEventsFragment extends Fragment implements View.OnClickListe
         String class_ = filtersDict.get("class");
         String subject = filtersDict.get("subject");
 
-        Call<List<CurrentOlympiad>> call = client.getCurrentEvents(class_, subject);
+        Call<List<Olympiad>> call = client.getCurrentEvents(class_, subject);
 
-        call.enqueue(new Callback<List<CurrentOlympiad>>() {
+        call.enqueue(new Callback<List<Olympiad>>() {
             @Override
-            public void onResponse(Call<List<CurrentOlympiad>> call, Response<List<CurrentOlympiad>> response) {
+            public void onResponse(Call<List<Olympiad>> call, Response<List<Olympiad>> response) {
                 olympiadList = response.body();
                 olympiadList = response.body();
                 olympiadListView = view.findViewById(R.id.currentList);
-                adapter = new CurrentOlympiadListAdapter(getContext(), olympiadList);
+                adapter = new OlympiadListAdapter(getContext(), olympiadList);
                 olympiadListView.setAdapter(adapter);
             }
 
             @Override
-            public void onFailure(Call<List<CurrentOlympiad>> call, Throwable t) {
+            public void onFailure(Call<List<Olympiad>> call, Throwable t) {
                 Toast.makeText(getContext(), R.string.nothing_found, Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
             }

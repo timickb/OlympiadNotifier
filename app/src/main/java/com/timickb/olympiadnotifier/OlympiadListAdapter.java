@@ -40,9 +40,11 @@ public class OlympiadListAdapter extends BaseAdapter {
         Olympiad currentItem = mOlympiadList.get(position);
 
         String title = currentItem.getTitle();
-        String classes = Tools.getStringFromClasses(currentItem.getClasses());
         String subjects = Tools.getStringFromSubjects(currentItem.getSubjects());
-        String date = Tools.getStringFromMonths(currentItem.getDateStart(), currentItem.getDateEnd());
+        String classes = Tools.getStringFromIntClasses(currentItem.getClasses());
+        String dateStart = currentItem.getDateStart();
+        String dateEnd = currentItem.getDateEnd();
+
 
         TextView olympiadTitle = v.findViewById(R.id.olympiadTitle);
         TextView olympiadInfoSubjects = v.findViewById(R.id.olympiadInfoSubjects);
@@ -50,9 +52,10 @@ public class OlympiadListAdapter extends BaseAdapter {
         TextView olympiadInfoDate = v.findViewById(R.id.olympiadInfoDate);
 
         olympiadTitle.setText(title);
-        olympiadInfoSubjects.setText(subjects);
         olympiadInfoClasses.setText(classes);
-        olympiadInfoDate.setText(date);
+        olympiadInfoSubjects.setText(subjects);
+        olympiadInfoDate.setText(dateStart + " - " + dateEnd);
+
         return v;
     }
 }

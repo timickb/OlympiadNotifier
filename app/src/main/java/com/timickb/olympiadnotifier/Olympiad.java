@@ -16,7 +16,7 @@ public class Olympiad {
 
     @SerializedName("classes")
     @Expose
-    private ArrayList<String> classes;
+    private ArrayList<Integer> classes;
 
     @SerializedName("date_start")
     @Expose
@@ -30,31 +30,31 @@ public class Olympiad {
     @Expose
     private String link;
 
-    @SerializedName("orgs")
+    @SerializedName("id")
     @Expose
-    private ArrayList<String> organizers;
+    private int id;
 
     public String getTitle() {
         return title;
-    }
-
-    public ArrayList<String> getSubjects() {
-        return subjects;
-    }
-
-    public ArrayList<String> getClasses() {
-        return classes;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
+    public ArrayList<String> getSubjects() {
+        return subjects;
+    }
+
     public void setSubjects(ArrayList<String> subjects) {
         this.subjects = subjects;
     }
 
-    public void setClasses(ArrayList<String> classes) {
+    public ArrayList<Integer> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(ArrayList<Integer> classes) {
         this.classes = classes;
     }
 
@@ -74,19 +74,19 @@ public class Olympiad {
         this.dateEnd = dateEnd;
     }
 
-    public ArrayList<String> getOrganizers() {
-        return organizers;
-    }
-
-    public void setOrganizers(ArrayList<String> organizers) {
-        this.organizers = organizers;
-    }
-
     public String getLink() {
         return link;
     }
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

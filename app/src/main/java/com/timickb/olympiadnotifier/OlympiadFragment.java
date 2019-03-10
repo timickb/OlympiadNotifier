@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class OlympiadFragment extends Fragment {
     private TextView dateInfo;
     private TextView orgsInfo;
     private TextView olympiadSite;
+    private Button favBtn;
     private boolean isOrganizers;
     private View view;
 
@@ -31,6 +33,7 @@ public class OlympiadFragment extends Fragment {
         dateInfo = view.findViewById(R.id.dateInfo);
         orgsInfo = view.findViewById(R.id.orgsList);
         olympiadSite = view.findViewById(R.id.olympiadLink);
+        favBtn = view.findViewById(R.id.addToFavBtn);
 
         String title = getArguments().getString("title");
         String classes = new String();
@@ -64,6 +67,10 @@ public class OlympiadFragment extends Fragment {
         else orgsInfo.setText(R.string.unknown);
         if(link.equals("undefined")) olympiadSite.setText(R.string.unknown);
         else olympiadSite.setText(link);
+
+        // button
+
+
 
         return view;
     }

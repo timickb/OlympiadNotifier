@@ -34,7 +34,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     private Retrofit retrofit;
     private API client;
     private Button applyBtn;
-    private Spinner classChooser, subjectChooser, monthChooser;
+    private Spinner classChooser, subjectChooser;
     private ListView olympiadListView;
     private OlympiadListAdapter adapter;
     private Map<String, String> filtersDict = new HashMap<String, String>();
@@ -58,11 +58,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         // initialize filters dict
         filtersDict.put("class", userClass);
         filtersDict.put("subject", "-1");
-        filtersDict.put("date", "-1");
 
         classChooser = (Spinner) view.findViewById(R.id.classChooser);
         subjectChooser = (Spinner) view.findViewById(R.id.subjectChooser);
-        monthChooser = (Spinner) view.findViewById(R.id.monthChooser);
 
         // class spinner handler
         ArrayAdapter<CharSequence> classAdapter = ArrayAdapter.createFromResource(getContext(), R.array.classes, android.R.layout.simple_spinner_item);
@@ -111,36 +109,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        // month spinner handler
-        ArrayAdapter<CharSequence> monthAdapter = ArrayAdapter.createFromResource(getContext(), R.array.months, android.R.layout.simple_spinner_item);
-        monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        monthChooser.setAdapter(monthAdapter);
-        monthChooser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item_raw = parent.getSelectedItem().toString();
-                String item = "-1";
-
-                if(item_raw == getString(R.string.january)) item="january";
-                else if(item_raw == getString(R.string.february)) item="february";
-                else if(item_raw == getString(R.string.march)) item="march";
-                else if(item_raw == getString(R.string.april)) item="april";
-                else if(item_raw == getString(R.string.may)) item="may";
-                else if(item_raw == getString(R.string.june)) item="june";
-                else if(item_raw == getString(R.string.july)) item="july";
-                else if(item_raw == getString(R.string.august)) item="august";
-                else if(item_raw == getString(R.string.september)) item="september";
-                else if(item_raw == getString(R.string.october)) item="october";
-                else if(item_raw == getString(R.string.november)) item="november";
-                else if(item_raw == getString(R.string.december)) item="december";
-
-                filtersDict.put("date", item);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
-
         // apply button handler
         applyBtn = view.findViewById(R.id.applyBtn);
         applyBtn.setOnClickListener(this);
@@ -148,9 +116,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         // make default query
         String class_ = filtersDict.get("class");
         String subject = filtersDict.get("subject");
-        String date = filtersDict.get("date");
 
-        Call<List<Olympiad>> call = client.getOlympiads(class_, subject, date);
+        Call<List<Olympiad>> call = client.getNextEvents(class_, subject);
 
         call.enqueue(new Callback<List<Olympiad>>() {
             @Override
@@ -168,9 +135,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                         args.putString("title", olympiad.getTitle());
                         args.putString("date_start", olympiad.getDateStart());
                         args.putString("date_end", olympiad.getDateEnd());
-                        args.putStringArrayList("classes", olympiad.getClasses());
+                        args.putIntegerArrayList("classes", olympiad.getClasses());
                         args.putStringArrayList("subjects", olympiad.getSubjects());
-                        args.putStringArrayList("organizers", olympiad.getOrganizers());
                         args.putString("link", olympiad.getLink());
                         newFragment.setArguments(args);
 
@@ -203,7 +169,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         String subject = filtersDict.get("subject");
         String date = filtersDict.get("date");
 
-        Call<List<Olympiad>> call = client.getOlympiads(class_, subject, date);
+        Call<List<Olympiad>> call = client.getNextEvents(class_, subject);
 
         call.enqueue(new Callback<List<Olympiad>>() {
             @Override
