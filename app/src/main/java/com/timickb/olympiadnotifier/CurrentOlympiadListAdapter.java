@@ -6,14 +6,17 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.security.auth.Subject;
 
 public class CurrentOlympiadListAdapter extends BaseAdapter {
     private Context mContext;
-    private List<Olympiad> mOlympiadList;
+    private List<CurrentOlympiad> mOlympiadList;
 
 
-    public CurrentOlympiadListAdapter(Context mContext, List<Olympiad> mOlympiadList) {
+    public CurrentOlympiadListAdapter(Context mContext, List<CurrentOlympiad> mOlympiadList) {
         this.mContext = mContext;
         this.mOlympiadList = mOlympiadList;
     }
@@ -37,12 +40,14 @@ public class CurrentOlympiadListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = View.inflate(mContext, R.layout.olympiad_item, null);
 
-        Olympiad currentItem = mOlympiadList.get(position);
+        CurrentOlympiad currentItem = mOlympiadList.get(position);
 
         String title = currentItem.getTitle();
-        String classes = Tools.getStringFromClasses(currentItem.getClasses());
         String subjects = Tools.getStringFromSubjects(currentItem.getSubjects());
-        String date = Tools.getStringFromMonths(currentItem.getDateStart(), currentItem.getDateEnd());
+        String classes = Tools.getStringFromIntClasses(currentItem.getClasses());
+        String dateStart = currentItem.getDateStart();
+        String dateEnd = currentItem.getDateEnd();
+
 
         TextView olympiadTitle = v.findViewById(R.id.olympiadTitle);
         TextView olympiadInfoSubjects = v.findViewById(R.id.olympiadInfoSubjects);
@@ -50,9 +55,10 @@ public class CurrentOlympiadListAdapter extends BaseAdapter {
         TextView olympiadInfoDate = v.findViewById(R.id.olympiadInfoDate);
 
         olympiadTitle.setText(title);
-        olympiadInfoSubjects.setText(subjects);
         olympiadInfoClasses.setText(classes);
-        olympiadInfoDate.setText(date);
+        olympiadInfoSubjects.setText(subjects);
+        olympiadInfoDate.setText(dateStart + " - " + dateEnd);
+
         return v;
     }
 }

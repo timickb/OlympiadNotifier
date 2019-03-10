@@ -11,6 +11,13 @@ public class Tools {
 
         return classes;
     }
+    public static String getStringFromIntClasses(List<Integer> classesRaw) {
+        String result = new String();
+        if(classesRaw.size() == 1) result = Integer.toString(classesRaw.get(0)) + " класс";
+        else result = Integer.toString(classesRaw.get(0)) + "-" + Integer.toString(classesRaw.get(classesRaw.size()-1)) + " класс";
+
+        return result;
+    }
 
     public static String getStringFromSubjects(List<String> subjectsRaw) {
         String subjects = new String();

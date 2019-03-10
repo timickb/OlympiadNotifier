@@ -9,4 +9,7 @@ import retrofit2.http.Query;
 public interface API {
     @GET("/get")
     public Call<List<Olympiad>> getOlympiads(@Query("class") String class_, @Query("subject") String subject, @Query("date") String date);
+
+    @GET("/getCurrent")
+    public Call<List<CurrentOlympiad>> getCurrentEvents(@Query("class") String class_, @Query("subject") String subject);
 }
