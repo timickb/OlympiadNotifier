@@ -18,6 +18,7 @@ public class OlympiadFragment extends Fragment {
     private TextView dateInfo;
     private TextView orgsInfo;
     private TextView olympiadSite;
+    private boolean isOrganizers;
     private View view;
 
 
@@ -32,22 +33,35 @@ public class OlympiadFragment extends Fragment {
         olympiadSite = view.findViewById(R.id.olympiadLink);
 
         String title = getArguments().getString("title");
-        String classes = Tools.getStringFromClasses(getArguments().getStringArrayList("classes"));
+        String classes = new String();
+        try {
+            classes = Tools.getStringFromClasses(getArguments().getStringArrayList("classes"));
+        } catch(Exception e) {
+            classes = Tools.getStringFromIntClasses(getArguments().getIntegerArrayList("classes"));
+        }
+
         String subjects = Tools.getStringFromSubjects(getArguments().getStringArrayList("subjects"));
         String date = Tools.getStringFromMonths(getArguments().getString("date_start"), getArguments().getString("date_end"));
         String organizers = new String();
         String link = getArguments().getString("link");
-        if(getArguments().getStringArrayList("organizers").size() == 0) {
-            organizers = getString(R.string.unknown);
-        } else {
-            organizers = Tools.getStringFromOrganizers(getArguments().getStringArrayList("organizers"));
+        try {
+            if(getArguments().getStringArrayList("organizers").size() == 0) {
+                organizers = getString(R.string.unknown);
+            } else {
+                organizers = Tools.getStringFromOrganizers(getArguments().getStringArrayList("organizers"));
+            }
+            isOrganizers = true;
+        } catch(Exception e) {
+            isOrganizers = false;
         }
+
 
         olTitle.setText(title);
         subjectsInfo.setText(subjects);
         classesInfo.setText(classes);
         dateInfo.setText(date);
-        orgsInfo.setText(organizers);
+        if(isOrganizers) orgsInfo.setText(organizers);
+        else orgsInfo.setText(R.string.unknown);
         if(link.equals("undefined")) olympiadSite.setText(R.string.unknown);
         else olympiadSite.setText(link);
 
