@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#4C4161</color>
     <color name="colorAccent">#646168</color>
 
-    <color name="colorPrimaryNight">#333333</color>
-    <color name="colorPrimaryNightDark">#292929</color>
+    <color name="colorPrimaryNight">#292929</color>
+    <color name="colorPrimaryNightDark">#222222</color>
+    <color name="backgroundDark">#333333</color>
 </resources>

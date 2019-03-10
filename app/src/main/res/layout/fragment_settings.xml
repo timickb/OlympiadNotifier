@@ -5,6 +5,7 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/backgroundColor"
     tools:context=".SettingsFragment"
     tools:layout_editor_absoluteY="81dp">
 
@@ -38,6 +39,7 @@
             android:layout_height="wrap_content"
             android:text="Класс"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textColor="?attr/textColor"
             tools:layout_editor_absoluteX="110dp"
             tools:layout_editor_absoluteY="172dp" />
 
@@ -83,6 +85,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="Интересующие предметы"
+            android:textColor="?attr/textColor"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
@@ -120,6 +123,7 @@
             android:layout_width="176dp"
             android:layout_height="21dp"
             android:text="@string/option_dark_theme"
+            android:textColor="?attr/textColor"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             tools:layout_editor_absoluteX="67dp"
             tools:layout_editor_absoluteY="237dp" />

@@ -5,6 +5,7 @@
     android:id="@+id/olympiadLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/backgroundColor"
     tools:context=".OlympiadFragment">
 
     <TextView
@@ -16,6 +17,7 @@
         android:layout_marginEnd="8dp"
         android:text="Title"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="?attr/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -60,6 +62,7 @@
             android:layout_height="wrap_content"
             android:text="classes"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="?attr/textColor"
             tools:layout_editor_absoluteX="40dp"
             tools:layout_editor_absoluteY="77dp" />
 
@@ -73,6 +76,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:orientation="horizontal"
+        android:background="?attr/backgroundColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
@@ -91,6 +95,7 @@
             android:layout_height="wrap_content"
             android:text="subjects"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="?attr/textColor"
             tools:layout_editor_absoluteX="40dp"
             tools:layout_editor_absoluteY="50dp" />
     </LinearLayout>
@@ -103,6 +108,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:orientation="horizontal"
+        android:background="?attr/backgroundColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
@@ -121,6 +127,7 @@
             android:layout_height="wrap_content"
             android:text="date"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="?attr/textColor"
             tools:layout_editor_absoluteX="40dp"
             tools:layout_editor_absoluteY="104dp" />
     </LinearLayout>
@@ -133,6 +140,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         android:text="@string/organizers_header"
+        android:textColor="?attr/textColor"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -147,6 +155,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/site"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textColor="?attr/textColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/orgsList" />
 
@@ -158,6 +167,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="TextView"
+        android:textColor="?attr/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -171,6 +181,7 @@
         android:layout_marginEnd="8dp"
         android:autoLink="web"
         android:text="link"
+        android:textColor="?attr/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />

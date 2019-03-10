@@ -17,6 +17,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /*if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.DarkAppTheme);
+        } else {
+            setTheme(R.style.AppTheme);
+        }*/
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.fragment_main);
         setContentView(R.layout.activity_main);
@@ -94,6 +99,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_about) {
             setTitle(R.string.info_title);
             InfoFragment newFragment = new InfoFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragment, newFragment).commit();
+        } else if(id == R.id.nav_current) {
+            setTitle(R.string.current_title);
+            CurrentEventsFragment newFragment = new CurrentEventsFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragment, newFragment).commit();
         }

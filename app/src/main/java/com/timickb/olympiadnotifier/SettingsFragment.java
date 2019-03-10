@@ -1,10 +1,12 @@
 package com.timickb.olympiadnotifier;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,13 +24,11 @@ public class SettingsFragment extends Fragment {
     private Switch themeSwitch;
     private SharedPreferences prefs;
     private View view;
-    private boolean darkTheme;
     private String userClass;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_settings, container, false);
         prefs = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
-        darkTheme = prefs.getBoolean("theme", false);
         userClass = prefs.getString("class", "7");
 
         classChooser = view.findViewById(R.id.userClassChooser);
@@ -51,13 +51,17 @@ public class SettingsFragment extends Fragment {
         });
 
         themeSwitch = view.findViewById(R.id.themeSwitch);
-        themeSwitch.setChecked(darkTheme);
+        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            themeSwitch.setChecked(true);
+        }
         themeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    SharedPreferences.Editor editor = prefs.edit();
-                    editor.putBoolean("theme", isChecked);
-                    editor.commit();
+                if (isChecked) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
             }
         });
 
