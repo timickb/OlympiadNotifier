@@ -41,7 +41,7 @@ public class OlympiadListAdapter extends BaseAdapter {
 
         String title = currentItem.getTitle();
         String subjects = Tools.getStringFromSubjects(currentItem.getSubjects());
-        String classes = Tools.getStringFromIntClasses(currentItem.getClasses());
+        String classes = Tools.getStringFromClasses(currentItem.getClasses());
         String dateStart = currentItem.getDateStart();
         String dateEnd = currentItem.getDateEnd();
 

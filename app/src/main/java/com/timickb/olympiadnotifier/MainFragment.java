@@ -132,12 +132,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                         Olympiad olympiad = olympiadList.get(position);
                         OlympiadFragment newFragment = new OlympiadFragment();
                         Bundle args = new Bundle();
-                        args.putString("title", olympiad.getTitle());
-                        args.putString("date_start", olympiad.getDateStart());
-                        args.putString("date_end", olympiad.getDateEnd());
-                        args.putIntegerArrayList("classes", olympiad.getClasses());
-                        args.putStringArrayList("subjects", olympiad.getSubjects());
-                        args.putString("link", olympiad.getLink());
+                        args.putParcelable("olympiad", olympiad);
                         newFragment.setArguments(args);
 
                         FragmentTransaction fr = getFragmentManager().beginTransaction();

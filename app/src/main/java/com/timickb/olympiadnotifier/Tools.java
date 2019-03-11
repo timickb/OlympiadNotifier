@@ -4,17 +4,10 @@ import java.util.List;
 
 public class Tools {
 
-    public static String getStringFromClasses(List<String> classesRaw) {
-        String classes = new String();
-        if(classesRaw.size() == 1) classes = classesRaw.get(0) + " класс";
-        else classes = classesRaw.get(0) + "-" + classesRaw.get(classesRaw.size()-1) + " класс";
-
-        return classes;
-    }
-    public static String getStringFromIntClasses(List<Integer> classesRaw) {
+    public static String getStringFromClasses(int [] classesRaw) {
         String result = new String();
-        if(classesRaw.size() == 1) result = Integer.toString(classesRaw.get(0)) + " класс";
-        else result = Integer.toString(classesRaw.get(0)) + "-" + Integer.toString(classesRaw.get(classesRaw.size()-1)) + " класс";
+        if(classesRaw.length == 1) result = Integer.toString(classesRaw[0]) + " класс";
+        else result = Integer.toString(classesRaw[0]) + "-" + Integer.toString(classesRaw[classesRaw.length-1]) + " класс";
 
         return result;
     }

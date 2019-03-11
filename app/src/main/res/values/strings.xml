@@ -19,7 +19,9 @@
     <string name="more_info">Подробнее</string>
     <string name="create_notify">Создать напоминание для этого события</string>
     <string name="add_to_fav">Добавить в избранное</string>
+    <string name="added_to_fav">Добавлено в избранное</string>
     <string name="remove_from_fav">Удалить из избранного</string>
+    <string name="removed_from_fav">Удалено из избранного</string>
     <string name="settings_class">Класс</string>
     <string name="settings_subjects">Интересующие предметы</string>
     <string name="settings_theme">Тема</string>
