@@ -106,6 +106,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             CurrentEventsFragment newFragment = new CurrentEventsFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragment, newFragment).commit();
+        } else if(id == R.id.nav_fav) {
+            setTitle(R.string.favourites);
+            FavouritesFragment newFragment = new FavouritesFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragment, newFragment).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

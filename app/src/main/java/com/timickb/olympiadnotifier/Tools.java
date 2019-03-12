@@ -1,8 +1,34 @@
 package com.timickb.olympiadnotifier;
 
+import android.content.SharedPreferences;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Tools {
+
+    public static boolean intListContains(ArrayList<Integer> list, int n) {
+        if(list == null) return false;
+        boolean result = false;
+        for(int element : list) {
+            if(element == n) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+
+    public static String removeIdFromFavList(String list, int id) {
+        String[] arr = list.split(",");
+        String result = "";
+        for(int i = 0; i < arr.length; i++) {
+            if(arr[i].equals(Integer.toString(id))) arr[i] = "";
+            result += arr[i];
+            if(i < arr.length-1) result += ",";
+        }
+        return result;
+    }
 
     public static String getStringFromClasses(int [] classesRaw) {
         String result = new String();
