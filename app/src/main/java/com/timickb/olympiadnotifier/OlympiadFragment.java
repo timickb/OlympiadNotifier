@@ -18,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class OlympiadFragment extends Fragment implements View.OnClickListener {
 
@@ -31,6 +32,7 @@ public class OlympiadFragment extends Fragment implements View.OnClickListener {
     private View view;
     private SharedPreferences settings;
     private boolean isFav;
+    private int currentDay, currentMonth;
 
 
     @Override
@@ -38,6 +40,9 @@ public class OlympiadFragment extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.fragment_olympiad, container, false);
 
         settings = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+        Calendar calendar = Calendar.getInstance();
+        this.currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+        this.currentMonth = calendar.get(Calendar.MONTH)+1;
 
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("fav_list", "");
@@ -54,8 +59,20 @@ public class OlympiadFragment extends Fragment implements View.OnClickListener {
         String title = olympiad.getTitle();
         String classes = Tools.getStringFromClasses(olympiad.getClasses());
         String subjects = Tools.getStringFromSubjects(olympiad.getSubjects());
-        String date = Tools.getStringFromMonths(olympiad.getDateStart(), olympiad.getDateEnd());
+        String dateStart = olympiad.getDateStart();
+        String dateEnd = olympiad.getDateEnd();
         String link = olympiad.getLink();
+
+        String date = dateStart + " - " + dateEnd;
+        if(Tools.isExpired(dateEnd, currentDay, currentMonth)) {
+            date = getActivity().getString(R.string.expired);
+        } else if(Tools.isToday(dateEnd, currentDay, currentMonth)) {
+            date = getActivity().getString(R.string.ends_today);
+            dateInfo.setTextColor(getActivity().getResources().getColor(android.R.color.holo_orange_dark));
+        } else if(Tools.isTomorrow(dateEnd, currentDay, currentMonth)) {
+            date = getActivity().getString(R.string.ends_tomorrow);
+            dateInfo.setTextColor(getActivity().getResources().getColor(android.R.color.holo_orange_dark));
+        }
 
         olTitle.setText(title);
         subjectsInfo.setText(subjects);

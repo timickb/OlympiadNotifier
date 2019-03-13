@@ -29,6 +29,8 @@
     <string name="site">Официальный сайт:</string>
     <string name="unknown">Информация незивестна</string>
     <string name="expired">Просрочено</string>
+    <string name="ends_today">Сегодня последний день!</string>
+    <string name="ends_tomorrow">Завтра последний день!</string>
 
     <string name="option_dark_theme">Темная тема</string>
 

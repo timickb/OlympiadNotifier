@@ -38,7 +38,7 @@ public class FavouritesFragment extends Fragment {
 
         Calendar calendar = Calendar.getInstance();
         this.currentDay = calendar.get(Calendar.DAY_OF_MONTH);
-        this.currentMonth = calendar.get(Calendar.MONTH);
+        this.currentMonth = calendar.get(Calendar.MONTH)+1;
 
         Gson gson = new Gson();
         String json = settings.getString("fav_list", null);

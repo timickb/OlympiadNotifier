@@ -7,6 +7,20 @@ import java.util.List;
 
 public class Tools {
 
+    public static boolean isTomorrow(String date, int currentDay, int currentMonth) {
+        String[] parsed = date.split("\\.");
+        System.out.println(currentDay + " " + currentMonth);
+        if(currentMonth == Integer.parseInt(parsed[1]) && currentDay == Integer.parseInt(parsed[0])-1) return true;
+        return false;
+    }
+
+    public static boolean isToday(String date, int currentDay, int currentMonth) {
+        String[] parsed = date.split("\\.");
+        System.out.println(currentDay + " " + currentMonth);
+        if(currentMonth == Integer.parseInt(parsed[1]) && currentDay == Integer.parseInt(parsed[0])) return true;
+        return false;
+    }
+
     public static boolean isExpired(String date, int currentDay, int currentMonth) {
         String[] parsed = date.split("\\.");
         if(currentMonth > Integer.parseInt(parsed[1])) return true;

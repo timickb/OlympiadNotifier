@@ -18,7 +18,7 @@ public class OlympiadListAdapter extends BaseAdapter {
     public OlympiadListAdapter(Context mContext, List<Olympiad> mOlympiadList) {
         Calendar calendar = Calendar.getInstance();
         this.currentDay = calendar.get(Calendar.DAY_OF_MONTH);
-        this.currentMonth = calendar.get(Calendar.MONTH);
+        this.currentMonth = calendar.get(Calendar.MONTH)+1;
         this.mContext = mContext;
         this.mOlympiadList = mOlympiadList;
     }
@@ -42,6 +42,11 @@ public class OlympiadListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = View.inflate(mContext, R.layout.olympiad_item, null);
 
+        TextView olympiadTitle = v.findViewById(R.id.olympiadTitle);
+        TextView olympiadInfoSubjects = v.findViewById(R.id.olympiadInfoSubjects);
+        TextView olympiadInfoClasses = v.findViewById(R.id.olympiadInfoClasses);
+        TextView olympiadInfoDate = v.findViewById(R.id.olympiadInfoDate);
+
         Olympiad currentItem = mOlympiadList.get(position);
 
         String title = currentItem.getTitle();
@@ -49,15 +54,18 @@ public class OlympiadListAdapter extends BaseAdapter {
         String classes = Tools.getStringFromClasses(currentItem.getClasses());
         String dateStart = currentItem.getDateStart();
         String dateEnd = currentItem.getDateEnd();
-        String date = dateEnd + " - " + dateEnd;
+        String date = dateStart + " - " + dateEnd;
         if(Tools.isExpired(dateEnd, currentDay, currentMonth)) {
             date = mContext.getString(R.string.expired);
+        } else if(Tools.isToday(dateEnd, currentDay, currentMonth)) {
+            date = mContext.getString(R.string.ends_today);
+            olympiadInfoDate.setTextColor(mContext.getResources().getColor(android.R.color.holo_orange_light));
+            v.setBackgroundColor(mContext.getResources().getColor(R.color.colorWarning));
+        } else if(Tools.isTomorrow(dateEnd, currentDay, currentMonth)) {
+            date = mContext.getString(R.string.ends_tomorrow);
+            olympiadInfoDate.setTextColor(mContext.getResources().getColor(android.R.color.holo_orange_light));
+            v.setBackgroundColor(mContext.getResources().getColor(R.color.colorWarning));
         }
-
-        TextView olympiadTitle = v.findViewById(R.id.olympiadTitle);
-        TextView olympiadInfoSubjects = v.findViewById(R.id.olympiadInfoSubjects);
-        TextView olympiadInfoClasses = v.findViewById(R.id.olympiadInfoClasses);
-        TextView olympiadInfoDate = v.findViewById(R.id.olympiadInfoDate);
 
         olympiadTitle.setText(title);
         olympiadInfoClasses.setText(classes);
