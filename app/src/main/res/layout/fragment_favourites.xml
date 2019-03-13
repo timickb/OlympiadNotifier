@@ -10,7 +10,7 @@
     <ListView
         android:id="@+id/favList"
         android:layout_width="0dp"
-        android:layout_height="569dp"
+        android:layout_height="548dp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         app:layout_constraintBottom_toBottomOf="parent"

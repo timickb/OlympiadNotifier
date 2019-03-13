@@ -5,9 +5,11 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -43,6 +45,21 @@ public class FavouritesFragment extends Fragment {
             favListView = view.findViewById(R.id.favList);
             adapter = new OlympiadListAdapter(getContext(), olympiadList);
             favListView.setAdapter(adapter);
+
+            favListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Olympiad olympiad = olympiadList.get(position);
+                    OlympiadFragment newFragment = new OlympiadFragment();
+                    Bundle args = new Bundle();
+                    args.putParcelable("olympiad", olympiad);
+                    newFragment.setArguments(args);
+
+                    FragmentTransaction fr = getFragmentManager().beginTransaction();
+                    fr.replace(R.id.fragment, newFragment);
+                    fr.commit();
+                }
+            });
         }
 
         return view;
