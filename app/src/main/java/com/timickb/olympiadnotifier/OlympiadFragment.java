@@ -5,10 +5,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.renderscript.ScriptGroup;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ public class OlympiadFragment extends Fragment implements View.OnClickListener {
     private Olympiad olympiad;
     private Button favBtn;
     private View view;
+    private Button closeButton;
     private SharedPreferences settings;
     private boolean isFav;
     private int currentDay, currentMonth;
@@ -53,6 +56,30 @@ public class OlympiadFragment extends Fragment implements View.OnClickListener {
         dateInfo = view.findViewById(R.id.dateInfo);
         olympiadSite = view.findViewById(R.id.olympiadLink);
         favBtn = view.findViewById(R.id.addToFavBtn);
+        closeButton = view.findViewById(R.id.closeButton);
+
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String title = getActivity().getTitle().toString();
+                if(title == getActivity().getString(R.string.favourites)) {
+                    FavouritesFragment newFragment = new FavouritesFragment();
+                    FragmentTransaction fr = getFragmentManager().beginTransaction();
+                    fr.replace(R.id.fragment, newFragment);
+                    fr.commit();
+                } else if(title == getActivity().getString(R.string.current_title)) {
+                    CurrentEventsFragment newFragment = new CurrentEventsFragment();
+                    FragmentTransaction fr = getFragmentManager().beginTransaction();
+                    fr.replace(R.id.fragment, newFragment);
+                    fr.commit();
+                } else if(title == getActivity().getString(R.string.main_title)) {
+                    MainFragment newFragment = new MainFragment();
+                    FragmentTransaction fr = getFragmentManager().beginTransaction();
+                    fr.replace(R.id.fragment, newFragment);
+                    fr.commit();
+                }
+            }
+        });
 
         olympiad = getArguments().getParcelable("olympiad");
 
