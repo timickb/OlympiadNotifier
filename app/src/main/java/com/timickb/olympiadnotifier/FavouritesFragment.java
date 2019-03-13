@@ -2,7 +2,6 @@ package com.timickb.olympiadnotifier;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -16,8 +15,11 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
 
 public class FavouritesFragment extends Fragment {
 
@@ -26,12 +28,17 @@ public class FavouritesFragment extends Fragment {
     private ArrayList<Olympiad> olympiadList = new ArrayList<Olympiad>();
     private OlympiadListAdapter adapter;
     private SharedPreferences settings;
+    private int currentDay, currentMonth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_favourites, container, false);
 
         settings = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+
+        Calendar calendar = Calendar.getInstance();
+        this.currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+        this.currentMonth = calendar.get(Calendar.MONTH);
 
         Gson gson = new Gson();
         String json = settings.getString("fav_list", null);
@@ -40,7 +47,13 @@ public class FavouritesFragment extends Fragment {
         if(ids.size() > 0) {
             for(int i = 0; i < ids.size(); i++) {
                 json = settings.getString("fav"+ids.get(i), "");
-                olympiadList.add(gson.fromJson(json, Olympiad.class));
+                Olympiad newOlympiad = gson.fromJson(json, Olympiad.class);
+                if(Tools.isExpired(newOlympiad.getDateEnd(), currentDay, currentMonth)) {
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.remove("fav"+ids.get(i));
+                    continue;
+                }
+                olympiadList.add(newOlympiad);
             }
             favListView = view.findViewById(R.id.favList);
             adapter = new OlympiadListAdapter(getContext(), olympiadList);
