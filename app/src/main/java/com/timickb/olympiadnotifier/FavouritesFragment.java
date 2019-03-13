@@ -51,6 +51,13 @@ public class FavouritesFragment extends Fragment {
                 if(Tools.isExpired(newOlympiad.getDateEnd(), currentDay, currentMonth)) {
                     SharedPreferences.Editor editor = settings.edit();
                     editor.remove("fav"+ids.get(i));
+                    String favIDsRaw = settings.getString("fav_list", null);
+                    Type type0 = new TypeToken<ArrayList<Integer>>() {}.getType();
+                    ArrayList<Integer> favIDs = gson.fromJson(favIDsRaw, type0);
+                    favIDs.remove(new Integer(ids.get(i)));
+                    String newFavList = gson.toJson(favIDs);
+                    editor.putString("fav_list", newFavList);
+                    editor.commit();
                     continue;
                 }
                 olympiadList.add(newOlympiad);

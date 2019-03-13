@@ -77,10 +77,8 @@ public class SettingsFragment extends Fragment {
             if (hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59) {
                 String shours = "";
                 String sminutes = "";
-                if(hours < 10)
-                    shours += "0";
-                if(minutes < 10)
-                    sminutes += "0";
+                if(hours < 10) shours += "0";
+                if(minutes < 10) sminutes += "0";
                 shours += Integer.toString(hours);
                 sminutes += Integer.toString(minutes);
                 return shours + ":" + sminutes;
