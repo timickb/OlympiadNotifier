@@ -10,7 +10,7 @@
         <item name="buttonColor">@color/colorPrimary</item>
         <item name="textColor">@android:color/black</item>
         <item name="textColorInverted">@android:color/white</item>
-        <item name="cardColor">@color/colorPrimary</item>
+        <item name="cardColor">@color/cardColor</item>
     </style>
 
     <!-- Dark theme. -->

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -28,16 +29,14 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class CurrentEventsFragment extends Fragment implements View.OnClickListener {
+public class CurrentEventsFragment extends Fragment implements FiltersPopup.FiltersPopupListener {
 
     private View view;
     private Retrofit retrofit;
     private API client;
-    private Button applyBtn;
-    private Spinner classChooser, subjectChooser;
+    private FloatingActionButton filtersOpenBtn;
     private ListView olympiadListView;
     private OlympiadListAdapter adapter;
-    private Map<String, String> filtersDict = new HashMap<String, String>();
     private List<Olympiad> olympiadList;
     private SharedPreferences settings;
     private String userClass;
@@ -54,69 +53,23 @@ public class CurrentEventsFragment extends Fragment implements View.OnClickListe
         retrofit = builder.build();
         client = retrofit.create(API.class);
 
-        // initialize filters dict
-        filtersDict.put("class", userClass);
-        filtersDict.put("subject", "-1");
 
-        classChooser = (Spinner) view.findViewById(R.id.classChooserC);
-        subjectChooser = (Spinner) view.findViewById(R.id.subjectChooserC);
-
-        // class spinner handler
-        ArrayAdapter<CharSequence> classAdapter = ArrayAdapter.createFromResource(getContext(), R.array.classes, android.R.layout.simple_spinner_item);
-        classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        classChooser.setAdapter(classAdapter);
-        classChooser.setSelection(Integer.parseInt(userClass)-5);
-        classChooser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        // filters open btn handler
+        filtersOpenBtn = view.findViewById(R.id.filtersOpenBtn2);
+        filtersOpenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String text = parent.getSelectedItem().toString();
-                String class_ = text.split(" ")[0];
-                filtersDict.put("class", class_);
+            public void onClick(View v) {
+                FiltersPopup popup = new FiltersPopup();
+                Bundle args = new Bundle();
+                args.putInt("user_class", Integer.parseInt(userClass));
+                popup.setArguments(args);
+
+                popup.show(getFragmentManager(), "filters popup");
+                popup.setTargetFragment(CurrentEventsFragment.this, 1);
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        // subject spinner handler
-        ArrayAdapter<CharSequence> subjectAdapter = ArrayAdapter.createFromResource(getContext(), R.array.subjects, android.R.layout.simple_spinner_item);
-        subjectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        subjectChooser.setAdapter(subjectAdapter);
-        subjectChooser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item_raw = parent.getSelectedItem().toString();
-                String item = "-1";
-
-                if(item_raw == getString(R.string.math_subj)) item = "mathematics";
-                else if(item_raw == getString(R.string.russian_subj)) item = "russian";
-                else if(item_raw == getString(R.string.informatics_subj)) item = "informatics";
-                else if(item_raw == getString(R.string.physics_subj)) item = "physics";
-                else if(item_raw == getString(R.string.chemistry_subj)) item = "chemistry";
-                else if(item_raw == getString(R.string.biology_subj)) item = "biology";
-                else if(item_raw == getString(R.string.social_subj)) item = "social";
-                else if(item_raw == getString(R.string.literature_subj)) item = "literature";
-                else if(item_raw == getString(R.string.geography_subj)) item = "geography";
-                else if(item_raw == getString(R.string.foreign_subj)) item = "foreign";
-                else if(item_raw == getString(R.string.art_subj)) item = "art";
-                else if(item_raw == getString(R.string.economy_subj)) item = "economy";
-
-                filtersDict.put("subject", item);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
-
-        // apply button handler
-        applyBtn = view.findViewById(R.id.applyBtnC);
-        applyBtn.setOnClickListener(this);
-
-        // make default query
-        String class_ = filtersDict.get("class");
-        String subject = filtersDict.get("subject");
-
-        Call<List<Olympiad>> call = client.getCurrentEvents(class_, subject);
+        Call<List<Olympiad>> call = client.getCurrentEvents(userClass, "-1", "-1");
 
         call.enqueue(new Callback<List<Olympiad>>() {
             @Override
@@ -152,36 +105,6 @@ public class CurrentEventsFragment extends Fragment implements View.OnClickListe
         return view;
     }
 
-    @Override
-    public void onClick(View v) {
-        if(!hasConnection(getContext())) {
-            Toast.makeText(getContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String class_ = filtersDict.get("class");
-        String subject = filtersDict.get("subject");
-
-        Call<List<Olympiad>> call = client.getCurrentEvents(class_, subject);
-
-        call.enqueue(new Callback<List<Olympiad>>() {
-            @Override
-            public void onResponse(Call<List<Olympiad>> call, Response<List<Olympiad>> response) {
-                olympiadList = response.body();
-                olympiadList = response.body();
-                olympiadListView = view.findViewById(R.id.currentList);
-                adapter = new OlympiadListAdapter(getContext(), olympiadList);
-                olympiadListView.setAdapter(adapter);
-            }
-
-            @Override
-            public void onFailure(Call<List<Olympiad>> call, Throwable t) {
-                Toast.makeText(getContext(), R.string.nothing_found, Toast.LENGTH_SHORT).show();
-                System.out.println(t.getMessage());
-            }
-        });
-    }
-
     public static boolean hasConnection(final Context context)
     {
         ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -201,5 +124,32 @@ public class CurrentEventsFragment extends Fragment implements View.OnClickListe
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void applyData(String class_, String subject, String stage) {
+        if(!hasConnection(getContext())) {
+            Toast.makeText(getContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Call<List<Olympiad>> call = client.getNextEvents(class_, subject, stage);
+
+        call.enqueue(new Callback<List<Olympiad>>() {
+            @Override
+            public void onResponse(Call<List<Olympiad>> call, Response<List<Olympiad>> response) {
+                olympiadList = response.body();
+                olympiadList = response.body();
+                olympiadListView = view.findViewById(R.id.currentList);
+                adapter = new OlympiadListAdapter(getContext(), olympiadList);
+                olympiadListView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Olympiad>> call, Throwable t) {
+                Toast.makeText(getContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
+                System.out.println(t.getMessage());
+            }
+        });
     }
 }

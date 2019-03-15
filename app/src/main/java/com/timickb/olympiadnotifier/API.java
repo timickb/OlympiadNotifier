@@ -8,8 +8,8 @@ import retrofit2.http.Query;
 
 public interface API {
     @GET("/getNext")
-    public Call<List<Olympiad>> getNextEvents(@Query("class") String class_, @Query("subject") String subject);
+    public Call<List<Olympiad>> getNextEvents(@Query("class") String class_, @Query("subject") String subject, @Query("stage") String stage);
 
     @GET("/getCurrent")
-    public Call<List<Olympiad>> getCurrentEvents(@Query("class") String class_, @Query("subject") String subject);
+    public Call<List<Olympiad>> getCurrentEvents(@Query("class") String class_, @Query("subject") String subject, @Query("stage") String stage);
 }

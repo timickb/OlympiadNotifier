@@ -27,6 +27,8 @@ public class Olympiad implements Parcelable {
     @SerializedName("link")
     @Expose
     private String link;
+    @SerializedName("stage")
+    private String stage;
     @SerializedName("id")
     @Expose
     private int id;
@@ -133,5 +135,13 @@ public class Olympiad implements Parcelable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getStage() {
+        return stage;
+    }
+
+    public void setStage(String stage) {
+        this.stage = stage;
     }
 }

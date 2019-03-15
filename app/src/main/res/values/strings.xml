@@ -66,6 +66,15 @@
     <string name="error_occured">Произошла ошибка</string>
     <string name="nothing_found">Олимпиады не найдены</string>
 
+    <string name="any_stage">Любой этап</string>
+    <string name="selection_stage">Отборочный этап</string>
+    <string name="final_stage">Заключительный этап</string>
+
+    <string-array name="stages">
+        <item>@string/any_stage</item>
+        <item>@string/selection_stage</item>
+        <item>@string/final_stage</item>
+    </string-array>
     <string-array name="classes">
         <item>5 класс</item>
         <item>6 класс</item>
