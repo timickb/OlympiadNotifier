@@ -2,6 +2,8 @@
     <string name="server_url">http://94.103.83.68/</string>
 
     <string name="app_name">Olympiad Tracker</string>
+    <string name="app_build">71</string>
+    <string name="app_version">1.0</string>
     <string name="navigation_drawer_open">Открыть меню</string>
     <string name="navigation_drawer_close">Закрыть меню</string>
     <string name="nav_header_title">Android Studio</string>
@@ -33,6 +35,9 @@
     <string name="ends_tomorrow">Завтра последний день!</string>
 
     <string name="option_dark_theme">Темная тема</string>
+
+    <string name="feedback_link"><a href="mailto:timikm2002@gmail.com">Обратная связь</a></string>
+    <string name="sources_link"><a href="http://github.com/timickb/OlympiadNotifierAPI">Исходный код</a></string>
 
     <string name="all_subj">Все предметы</string>
     <string name="math_subj">Математика</string>
