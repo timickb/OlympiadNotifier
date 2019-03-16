@@ -6,6 +6,8 @@ import android.icu.text.SymbolTable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -41,22 +43,6 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
     private List<Olympiad> olympiadList;
     private SharedPreferences settings;
     private String userClass;
-
-    public void onResume() {
-        super.onResume();
-
-        ((MainActivity) getActivity()).setActionBarTitle(getActivity().getString(R.string.main_title));
-
-        System.out.println("Resuming main");
-    }
-    public void onPause() {
-        super.onPause();
-        System.out.println("Pausing main");
-    }
-    public void onCreate(Bundle bundle) {
-        super.onCreate(bundle);
-        ((MainActivity) getActivity()).setActionBarTitle(getActivity().getString(R.string.main_title));
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -168,5 +154,15 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
                 System.out.println(t.getMessage());
             }
         });
+    }
+
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) getActivity()).setActionBarTitle(getActivity().getString(R.string.main_title));
+    }
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        ((MainActivity) getActivity()).setActionBarTitle(getActivity().getString(R.string.main_title));
+        setRetainInstance(true);
     }
 }

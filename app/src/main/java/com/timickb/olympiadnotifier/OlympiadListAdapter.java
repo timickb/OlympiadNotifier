@@ -59,10 +59,10 @@ public class OlympiadListAdapter extends BaseAdapter {
             date = mContext.getString(R.string.expired);
         } else if(Tools.isToday(dateEnd, currentDay, currentMonth)) {
             date = mContext.getString(R.string.ends_today);
-            olympiadInfoDate.setTextColor(mContext.getResources().getColor(android.R.color.holo_orange_light));
+            olympiadInfoDate.setTextColor(mContext.getResources().getColor(android.R.color.holo_red_dark));
         } else if(Tools.isTomorrow(dateEnd, currentDay, currentMonth)) {
             date = mContext.getString(R.string.ends_tomorrow);
-            olympiadInfoDate.setTextColor(mContext.getResources().getColor(android.R.color.holo_orange_light));
+            olympiadInfoDate.setTextColor(mContext.getResources().getColor(android.R.color.holo_red_dark));
         }
 
         olympiadTitle.setText(title);

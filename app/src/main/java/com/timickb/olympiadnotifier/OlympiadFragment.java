@@ -95,10 +95,10 @@ public class OlympiadFragment extends Fragment implements View.OnClickListener {
             date = getActivity().getString(R.string.expired);
         } else if(Tools.isToday(dateEnd, currentDay, currentMonth)) {
             date = getActivity().getString(R.string.ends_today);
-            dateInfo.setTextColor(getActivity().getResources().getColor(android.R.color.holo_orange_dark));
+            dateInfo.setTextColor(getActivity().getResources().getColor(android.R.color.holo_red_dark));
         } else if(Tools.isTomorrow(dateEnd, currentDay, currentMonth)) {
             date = getActivity().getString(R.string.ends_tomorrow);
-            dateInfo.setTextColor(getActivity().getResources().getColor(android.R.color.holo_orange_dark));
+            dateInfo.setTextColor(getActivity().getResources().getColor(android.R.color.holo_red_dark));
         }
 
         olTitle.setText(title);

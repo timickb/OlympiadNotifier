@@ -19,11 +19,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /*if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.DarkAppTheme);
-        } else {
-            setTheme(R.style.AppTheme);
-        }*/
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.fragment_main);
         setContentView(R.layout.activity_main);
@@ -130,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void setActionBarTitle(String title) {
-        getSupportActionBar().setTitle(title);
+        setTitle(title);
     }
 
 }

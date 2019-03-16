@@ -5,10 +5,9 @@
     android:id="@+id/relativeLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
-    android:background="?attr/cardColor"
-    android:padding="4dp">
+    android:layout_margin="16dp"
+    android:background="@drawable/card_bg"
+    android:padding="8dp">
 
 
     <TextView
@@ -19,14 +18,14 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="2dp"
         android:text="Title"
-        android:textColor="?attr/textColorInverted"
+        android:textColor="?attr/textColor"
         android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/subjectsLayout"
+        android:id="@+id/recomendsLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -41,7 +40,7 @@
             android:id="@+id/imageView5"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_info_white"
+            app:srcCompat="@drawable/ic_info"
             tools:layout_editor_absoluteX="49dp"
             tools:layout_editor_absoluteY="179dp" />
 
@@ -50,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
-            android:textColor="?attr/textColorInverted"
+            android:textColor="?attr/textColor"
             tools:layout_editor_absoluteX="96dp"
             tools:layout_editor_absoluteY="183dp" />
 
@@ -66,13 +65,13 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subjectsLayout">
+        app:layout_constraintTop_toBottomOf="@+id/recomendsLayout">
 
         <ImageView
             android:id="@+id/imageView7"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_info_white"
+            app:srcCompat="@drawable/ic_info"
             tools:layout_editor_absoluteX="12dp"
             tools:layout_editor_absoluteY="73dp" />
 
@@ -82,7 +81,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
             tools:layout_editor_absoluteX="44dp"
-            android:textColor="?attr/textColorInverted"
+            android:textColor="?attr/textColor"
             tools:layout_editor_absoluteY="80dp" />
     </LinearLayout>
 
@@ -102,7 +101,7 @@
             android:id="@+id/imageView6"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_access_time_white"
+            app:srcCompat="@drawable/ic_access_time"
             tools:layout_editor_absoluteX="12dp"
             tools:layout_editor_absoluteY="105dp" />
 
@@ -110,7 +109,7 @@
             android:id="@+id/olympiadInfoDate"
             android:layout_width="363dp"
             android:layout_height="wrap_content"
-            android:textColor="?attr/textColorInverted"
+            android:textColor="?attr/textColor"
             android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
             tools:layout_editor_absoluteX="44dp"
             tools:layout_editor_absoluteY="115dp" />
