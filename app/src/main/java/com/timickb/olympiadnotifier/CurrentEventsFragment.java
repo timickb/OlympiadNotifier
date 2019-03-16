@@ -41,6 +41,16 @@ public class CurrentEventsFragment extends Fragment implements FiltersPopup.Filt
     private SharedPreferences settings;
     private String userClass;
 
+    public void onResume(){
+        super.onResume();
+
+        ((MainActivity) getActivity()).setActionBarTitle(getActivity().getString(R.string.current_title));
+    }
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        ((MainActivity) getActivity()).setActionBarTitle(getActivity().getString(R.string.current_title));
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_current_events, container, false);

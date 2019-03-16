@@ -29,6 +29,17 @@ public class SettingsFragment extends Fragment {
     private SharedPreferences settings;
     private View view;
     private String userClass;
+
+    public void onResume(){
+        super.onResume();
+
+        ((MainActivity) getActivity()).setActionBarTitle(getActivity().getString(R.string.settings_title));
+    }
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        ((MainActivity) getActivity()).setActionBarTitle(getActivity().getString(R.string.settings_title));
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_settings, container, false);

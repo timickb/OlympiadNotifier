@@ -12,6 +12,16 @@ import android.widget.TextView;
 
 public class InfoFragment extends Fragment {
 
+    public void onResume(){
+        super.onResume();
+
+        ((MainActivity) getActivity()).setActionBarTitle(getActivity().getString(R.string.info_title));
+    }
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        ((MainActivity) getActivity()).setActionBarTitle(getActivity().getString(R.string.info_title));
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info, container, false);

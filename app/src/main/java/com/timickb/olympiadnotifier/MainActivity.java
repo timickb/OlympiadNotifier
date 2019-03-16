@@ -1,9 +1,11 @@
 package com.timickb.olympiadnotifier;
 
+import android.support.v4.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -42,20 +44,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         // Show main fragment
-        setTitle(R.string.main_title);
+        setActionBarTitle(getString(R.string.main_title));
         MainFragment newFragment = new MainFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment, newFragment).commit();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.addToBackStack(null);
+        transaction.replace(R.id.fragment, newFragment).commit();
 
     }
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
+        FragmentManager mgr = getSupportFragmentManager();
+        if (!drawer.isDrawerOpen(GravityCompat.START) && mgr.getBackStackEntryCount() == 0) {
             super.onBackPressed();
+        } else {
+            mgr.popBackStack();
+            drawer.closeDrawer(GravityCompat.START);
         }
     }
 
@@ -87,34 +93,44 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_main) {
-            setTitle(R.string.main_title);
             MainFragment newFragment = new MainFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment, newFragment).commit();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.addToBackStack(null);
+            transaction.replace(R.id.fragment, newFragment).commit();
         } else if (id == R.id.nav_settings) {
-            setTitle(R.string.settings_title);
             SettingsFragment newFragment = new SettingsFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment, newFragment).commit();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.addToBackStack(null);
+            transaction.replace(R.id.fragment, newFragment).commit();
         } else if (id == R.id.nav_about) {
-            setTitle(R.string.info_title);
             InfoFragment newFragment = new InfoFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment, newFragment).commit();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.addToBackStack(null);
+            transaction.replace(R.id.fragment, newFragment).commit();
         } else if(id == R.id.nav_current) {
-            setTitle(R.string.current_title);
             CurrentEventsFragment newFragment = new CurrentEventsFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment, newFragment).commit();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.addToBackStack(null);
+            transaction.replace(R.id.fragment, newFragment).commit();
         } else if(id == R.id.nav_fav) {
-            setTitle(R.string.favourites);
             FavouritesFragment newFragment = new FavouritesFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment, newFragment).commit();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.addToBackStack(null);
+            transaction.replace(R.id.fragment, newFragment).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
+    }
+
 }

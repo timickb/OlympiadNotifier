@@ -30,6 +30,16 @@ public class FavouritesFragment extends Fragment {
     private SharedPreferences settings;
     private int currentDay, currentMonth;
 
+    public void onResume(){
+        super.onResume();
+
+        ((MainActivity) getActivity()).setActionBarTitle(getActivity().getString(R.string.favourites));
+    }
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        ((MainActivity) getActivity()).setActionBarTitle(getActivity().getString(R.string.favourites));
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_favourites, container, false);
