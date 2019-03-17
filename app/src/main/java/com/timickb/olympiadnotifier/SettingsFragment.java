@@ -26,6 +26,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class SettingsFragment extends Fragment {
     private Spinner classChooser;
     private EditText timeInput;
+    private Switch notifiesSwitch, recomendsSwitch;
     private SharedPreferences settings;
     private View view;
     private String userClass;
@@ -74,6 +75,27 @@ public class SettingsFragment extends Fragment {
                 String newTime = parseTime(timeInput.getText().toString());
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putString("notify_time", newTime);
+                editor.commit();
+            }
+        });
+
+        notifiesSwitch = view.findViewById(R.id.notifiesSwitch);
+        recomendsSwitch = view.findViewById(R.id.recomendsSwitch);
+        notifiesSwitch.setChecked(settings.getBoolean("notifies_switch", false));
+        recomendsSwitch.setChecked(settings.getBoolean("recomends_switch", false));
+        notifiesSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putBoolean("notifies_switch", isChecked);
+                editor.commit();
+            }
+        });
+        recomendsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putBoolean("recomends_switch", isChecked);
                 editor.commit();
             }
         });

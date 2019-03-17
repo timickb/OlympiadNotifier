@@ -79,8 +79,10 @@ public class CurrentEventsFragment extends Fragment implements FiltersPopup.Filt
             }
         });
 
-        Call<List<Olympiad>> call = client.getCurrentEvents(userClass, "-1", "-1");
-
+        // make default query
+        String defaultSubject = settings.getString("last_subject", "-1");
+        String defaultStage = settings.getString("last_stage", "-1");
+        Call<List<Olympiad>> call = client.getCurrentEvents(userClass, defaultSubject, defaultStage);
         call.enqueue(new Callback<List<Olympiad>>() {
             @Override
             public void onResponse(Call<List<Olympiad>> call, Response<List<Olympiad>> response) {

@@ -2,12 +2,9 @@ package com.timickb.olympiadnotifier;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.icu.text.SymbolTable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -15,17 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -72,8 +61,10 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
             }
         });
 
-        Call<List<Olympiad>> call = client.getNextEvents(userClass, "-1", "-1");
-
+        // make default query
+        String defaultSubject = settings.getString("last_subject", "-1");
+        String defaultStage = settings.getString("last_stage", "-1");
+        Call<List<Olympiad>> call = client.getNextEvents(userClass, defaultSubject, defaultStage);
         call.enqueue(new Callback<List<Olympiad>>() {
             @Override
             public void onResponse(Call<List<Olympiad>> call, Response<List<Olympiad>> response) {

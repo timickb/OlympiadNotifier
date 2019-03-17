@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatDialogFragment;
@@ -20,6 +21,25 @@ public class FiltersPopup extends DialogFragment {
     private Spinner classChooser, subjectChooser, stageChooser;
     private Map<String, String> filtersDict = new HashMap<String, String>();
     private FiltersPopupListener listener;
+    private SharedPreferences settings;
+
+    private int getPositionBySubject(String s) {
+        switch(s) {
+            case "mathematics": return 1;
+            case "russian": return 2;
+            case "informatics": return 3;
+            case "physics": return 4;
+            case "chemistry": return 5;
+            case "biology": return 6;
+            case "social": return 7;
+            case "literature": return 8;
+            case "geography": return 9;
+            case "foreign": return 10;
+            case "art": return 11;
+            case "economy": return 12;
+            default: return 0;
+        }
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -50,6 +70,8 @@ public class FiltersPopup extends DialogFragment {
                 listener.applyData(class_, subject, stage);
             }
         });
+
+        settings = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
 
         filtersDict.put("class", Integer.toString(getArguments().getInt("user_class")));
         filtersDict.put("subject", "-1");
@@ -100,11 +122,16 @@ public class FiltersPopup extends DialogFragment {
                 else if(item_raw == getString(R.string.economy_subj)) item = "economy";
 
                 filtersDict.put("subject", item);
+
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString("last_subject", item);
+                editor.commit();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
+        subjectChooser.setSelection(getPositionBySubject(settings.getString("last_subject", "-1")));
 
         // stage spinner handler
         ArrayAdapter<CharSequence> stageAdapter = ArrayAdapter.createFromResource(getContext(), R.array.stages, android.R.layout.simple_spinner_item);
@@ -120,11 +147,25 @@ public class FiltersPopup extends DialogFragment {
                 else if(item_raw == getString(R.string.final_stage)) item = "final";
 
                 filtersDict.put("stage", item);
+
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString("last_stage", item);
+                editor.commit();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
+        switch(settings.getString("last_stage", "-1")) {
+            case "selection":
+                stageChooser.setSelection(1);
+                break;
+            case "final":
+                stageChooser.setSelection(2);
+                break;
+            default:
+                stageChooser.setSelection(0);
+        }
 
         return builder.create();
     }
