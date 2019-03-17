@@ -145,7 +145,7 @@ public class CurrentEventsFragment extends Fragment implements FiltersPopup.Filt
             return;
         }
 
-        Call<List<Olympiad>> call = client.getNextEvents(class_, subject, stage);
+        Call<List<Olympiad>> call = client.getCurrentEvents(class_, subject, stage);
 
         call.enqueue(new Callback<List<Olympiad>>() {
             @Override
