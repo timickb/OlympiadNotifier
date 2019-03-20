@@ -18,6 +18,7 @@
     <string name="settings_title">Настройки</string>
     <string name="info_title">О приложении</string>
     <string name="olympiad_title">Об олимпиаде</string>
+    <string name="reference_title">Полезные ресурсы</string>
     <string name="more_info">Подробнее</string>
     <string name="create_notify">Создать напоминание для этого события</string>
     <string name="add_to_fav">Добавить в избранное</string>
@@ -34,10 +35,18 @@
     <string name="ends_today">Сегодня последний день!</string>
     <string name="ends_tomorrow">Завтра последний день!</string>
 
+    <string name="ref_problems_desc">Каталог олимпиадных задач:</string>
+    <string name="ref_rsr_desc">Список перечневых олимпиад:</string>
+    <string name="ref_cbias_desc">Руководство для поступления:</string>
+
+    <string name="ref_problems_link">http://problems.ru/</string>
+    <string name="ref_rsr_link">http://rsr-olymp.ru/</string>
+    <string name="ref_cbias_link">http://abitur.cbias.ru/</string>
+
     <string name="option_dark_theme">Темная тема</string>
 
     <string name="feedback_link"><a href="mailto:timikm2002@gmail.com">Обратная связь</a></string>
-    <string name="sources_link"><a href="http://github.com/timickb/OlympiadNotifierAPI">Исходный код</a></string>
+    <string name="sources_link"><a href="http://github.com/timickb/OlympiadNotifier">Исходный код</a></string>
 
     <string name="all_subj">Все предметы</string>
     <string name="math_subj">Математика</string>
@@ -74,6 +83,12 @@
     <string name="any_stage">Любой этап</string>
     <string name="selection_stage">Отборочный этап</string>
     <string name="final_stage">Заключительный этап</string>
+
+    <string-array name="start_fragments">
+        <item>@string/main_title</item>
+        <item>@string/current_title</item>
+        <item>@string/favourites</item>
+    </string-array>
 
     <string-array name="stages">
         <item>@string/any_stage</item>

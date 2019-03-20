@@ -19,14 +19,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static android.content.Context.MODE_PRIVATE;
 
 
 public class SettingsFragment extends Fragment {
-    private Spinner classChooser;
+    private Spinner classChooser, startScreenChooser;
     private EditText timeInput;
     private Switch notifiesSwitch, recomendsSwitch;
+    private Button changeSubjectsBtn;
     private SharedPreferences settings;
     private View view;
     private String userClass;
@@ -66,6 +68,41 @@ public class SettingsFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
+        startScreenChooser = view.findViewById(R.id.startScreenChooser);
+        ArrayAdapter<CharSequence> startScreenAdapter = ArrayAdapter.createFromResource(getContext(), R.array.start_fragments, android.R.layout.simple_spinner_item);
+        startScreenAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        startScreenChooser.setAdapter(startScreenAdapter);
+        String userStartFragment = settings.getString("start_fragment", "main");
+        switch(userStartFragment) {
+            case "main": startScreenChooser.setSelection(0);
+            break;
+            case "current": startScreenChooser.setSelection(1);
+            break;
+            case "favourites": startScreenChooser.setSelection(2);
+        }
+        startScreenChooser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String text = parent.getSelectedItem().toString();
+                SharedPreferences.Editor editor = settings.edit();
+                if(text == getString(R.string.main_title)) {
+                    editor.putString("start_fragment", "main");
+                    editor.commit();
+                } else if(text == getString(R.string.current_title)) {
+                    editor.putString("start_fragment", "current");
+                    editor.commit();
+                } else if(text == getString(R.string.favourites)) {
+                    editor.putString("start_fragment", "favourites");
+                    editor.commit();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+
+
         timeInput = view.findViewById(R.id.timeInput);
         String time = settings.getString("notify_time", "18:00");
         timeInput.setText(time);
@@ -97,6 +134,17 @@ public class SettingsFragment extends Fragment {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("recomends_switch", isChecked);
                 editor.commit();
+            }
+        });
+
+        changeSubjectsBtn = view.findViewById(R.id.changeSubjectsBtn);
+        changeSubjectsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SubjectsPopup popup = new SubjectsPopup();
+
+                popup.show(getFragmentManager(), "subjects popup");
+                popup.setTargetFragment(SettingsFragment.this, 1);
             }
         });
 

@@ -21,6 +21,10 @@
             android:icon="@drawable/ic_settings"
             android:title="Настройки" />
         <item
+            android:id="@+id/nav_ref"
+            android:icon="@drawable/ic_plus"
+            android:title="Полезные ресурсы" />
+        <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_info"
             android:title="О приложении" />

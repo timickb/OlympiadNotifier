@@ -1,6 +1,5 @@
 package com.timickb.olympiadnotifier;
 
-import android.support.v4.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private SharedPreferences settings;
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.setContentView(R.layout.fragment_main);
         setContentView(R.layout.activity_main);
 
-        settings = getSharedPreferences("prefs", MODE_PRIVATE);
+        settings = getSharedPreferences("pref", MODE_PRIVATE);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -37,15 +37,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-        // Show main fragment
-        setActionBarTitle(getString(R.string.main_title));
-        MainFragment newFragment = new MainFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.addToBackStack(null);
-        transaction.replace(R.id.fragment, newFragment).commit();
+        FragmentTransaction transaction;
 
+        String startFragment = settings.getString("start_fragment", "main");
+        if(startFragment.equals("current")) {
+            CurrentEventsFragment newFragment = new CurrentEventsFragment();
+            transaction = fragmentManager.beginTransaction();
+            transaction.addToBackStack(null);
+            transaction.replace(R.id.fragment, newFragment).commit();
+        } else if(startFragment.equals("favourites")) {
+            FavouritesFragment newFragment = new FavouritesFragment();
+            transaction = fragmentManager.beginTransaction();
+            transaction.addToBackStack(null);
+            transaction.replace(R.id.fragment, newFragment).commit();
+        } else {
+            MainFragment newFragment = new MainFragment();
+            transaction = fragmentManager.beginTransaction();
+            transaction.addToBackStack(null);
+            transaction.replace(R.id.fragment, newFragment).commit();
+        }
     }
 
     @Override
@@ -62,24 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        /*// Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);*/
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -113,6 +107,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             transaction.replace(R.id.fragment, newFragment).commit();
         } else if(id == R.id.nav_fav) {
             FavouritesFragment newFragment = new FavouritesFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.addToBackStack(null);
+            transaction.replace(R.id.fragment, newFragment).commit();
+        } else if(id == R.id.nav_ref) {
+            ReferenceFragment newFragment = new ReferenceFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.addToBackStack(null);
