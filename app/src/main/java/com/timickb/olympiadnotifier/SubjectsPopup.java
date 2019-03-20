@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-public class SubjectsPopup extends DialogFragment implements  DialogInterface.OnClickListener {
+public class SubjectsPopup extends DialogFragment {
     private CheckBox mathCheckBox;
     private CheckBox infCheckBox;
     private CheckBox rusCheckBox;
@@ -34,9 +34,10 @@ public class SubjectsPopup extends DialogFragment implements  DialogInterface.On
         builder.setView(view);
         builder.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {}
-        });
-        builder.setPositiveButton("OK", this);
+            public void onClick(DialogInterface dialog, int which) {}});
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {}});
 
         settings = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
 
@@ -163,9 +164,5 @@ public class SubjectsPopup extends DialogFragment implements  DialogInterface.On
         });
 
         return builder.create();
-    }
-
-    @Override
-    public void onClick(DialogInterface dialog, int which) {
     }
 }
