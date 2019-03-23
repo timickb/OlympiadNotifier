@@ -29,6 +29,8 @@ public class InfoFragment extends Fragment {
         feedbackLink.setMovementMethod(LinkMovementMethod.getInstance());
         TextView githubLink = view.findViewById(R.id.sourcesLink);
         githubLink.setMovementMethod(LinkMovementMethod.getInstance());
+        TextView apiLink = view.findViewById(R.id.apiLink);
+        apiLink.setMovementMethod(LinkMovementMethod.getInstance());
         return view;
     }
 }

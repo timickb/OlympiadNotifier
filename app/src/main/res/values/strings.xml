@@ -47,6 +47,7 @@
 
     <string name="feedback_link"><a href="mailto:timikm2002@gmail.com">Обратная связь</a></string>
     <string name="sources_link"><a href="http://github.com/timickb/OlympiadNotifier">Исходный код</a></string>
+    <string name="api_link"><a href="http://94.103.83.68">API</a></string>
 
     <string name="all_subj">Все предметы</string>
     <string name="math_subj">Математика</string>
