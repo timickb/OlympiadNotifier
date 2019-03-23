@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class CurrentEventsFragment extends Fragment implements FiltersPopup.Filt
     private API client;
     private FloatingActionButton filtersOpenBtn;
     private ListView olympiadListView;
+    private ProgressBar progressBar;
     private OlympiadListAdapter adapter;
     private List<Olympiad> olympiadList;
     private SharedPreferences settings;
@@ -63,8 +65,10 @@ public class CurrentEventsFragment extends Fragment implements FiltersPopup.Filt
         retrofit = builder.build();
         client = retrofit.create(API.class);
 
+        progressBar = view.findViewById(R.id.progressBar1);
 
-        // filters open btn handler
+
+        // обработка нажатия на кнопку вызова диалогового окна с фильтрами
         filtersOpenBtn = view.findViewById(R.id.filtersOpenBtn2);
         filtersOpenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +83,7 @@ public class CurrentEventsFragment extends Fragment implements FiltersPopup.Filt
             }
         });
 
-        // make default query
+        // делаем дефолтный запрос
         String defaultSubject = settings.getString("last_subject", "-1");
         String defaultStage = settings.getString("last_stage", "-1");
         Call<List<Olympiad>> call = client.getCurrentEvents(userClass, defaultSubject, defaultStage);
@@ -90,6 +94,7 @@ public class CurrentEventsFragment extends Fragment implements FiltersPopup.Filt
                 olympiadListView = view.findViewById(R.id.currentList);
                 adapter = new OlympiadListAdapter(getContext(), olympiadList);
                 olympiadListView.setAdapter(adapter);
+                progressBar.setVisibility(View.GONE);
                 olympiadListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -110,6 +115,7 @@ public class CurrentEventsFragment extends Fragment implements FiltersPopup.Filt
             public void onFailure(Call<List<Olympiad>> call, Throwable t) {
                 Toast.makeText(getContext(), R.string.nothing_found, Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
+                progressBar.setVisibility(View.GONE);
             }
         });
 
@@ -140,10 +146,12 @@ public class CurrentEventsFragment extends Fragment implements FiltersPopup.Filt
 
     @Override
     public void applyData(String class_, String subject, String stage) {
+        // обработка нажатия кнопки "ок" в окне выбора фильтров
         if(!hasConnection(getContext())) {
             Toast.makeText(getContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
             return;
         }
+        progressBar.setVisibility(View.VISIBLE);
 
         Call<List<Olympiad>> call = client.getCurrentEvents(class_, subject, stage);
 
@@ -155,12 +163,14 @@ public class CurrentEventsFragment extends Fragment implements FiltersPopup.Filt
                 olympiadListView = view.findViewById(R.id.currentList);
                 adapter = new OlympiadListAdapter(getContext(), olympiadList);
                 olympiadListView.setAdapter(adapter);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<List<Olympiad>> call, Throwable t) {
                 Toast.makeText(getContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
+                progressBar.setVisibility(View.GONE);
             }
         });
     }

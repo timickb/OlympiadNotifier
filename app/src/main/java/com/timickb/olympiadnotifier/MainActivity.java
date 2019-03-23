@@ -23,8 +23,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.setContentView(R.layout.fragment_main);
         setContentView(R.layout.activity_main);
 
+        // Импорт настроек пользователя
         settings = getSharedPreferences("pref", MODE_PRIVATE);
 
+        // Инициализация элементов навигации
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+        // Отображаем нужный фрагмент в зависимости от настроек пользователя
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction;
 
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
+        // Обработка нажатия кнопки возврата в Android
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         FragmentManager mgr = getSupportFragmentManager();
         if (!drawer.isDrawerOpen(GravityCompat.START) && mgr.getBackStackEntryCount() == 0) {
@@ -79,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        // Обработка переходов по пунктам бокового меню
         int id = item.getItemId();
 
         if (id == R.id.nav_main) {

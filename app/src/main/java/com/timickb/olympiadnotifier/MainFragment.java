@@ -1,10 +1,12 @@
 package com.timickb.olympiadnotifier;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import java.util.List;
 import retrofit2.Call;
@@ -28,6 +31,7 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
     private API client;
     private FloatingActionButton filtersOpenBtn;
     private ListView olympiadListView;
+    private ProgressBar progressBar;
     private OlympiadListAdapter adapter;
     private List<Olympiad> olympiadList;
     private SharedPreferences settings;
@@ -36,17 +40,19 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_main, container, false);
-        // initialize settings
+        // импортируем настройки пользователя
         settings = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
-        // read user settings
+        // считываем его класс
         userClass = settings.getString("class", "7");
-        // initialize retrofit
+        // инициализируем Retrofit
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl(getString(R.string.server_url))
                 .addConverterFactory(GsonConverterFactory.create());
         retrofit = builder.build();
         client = retrofit.create(API.class);
 
-        // filters open button handler
+        progressBar = view.findViewById(R.id.progressBar);
+
+        // обработка нажатия на кнопку вызова диалогового окна с фильтрами
         filtersOpenBtn = view.findViewById(R.id.filtersOpenBtn);
         filtersOpenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +67,7 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
             }
         });
 
-        // make default query
+        // делаем дефолтный запрос к серверу на основе последних фильтров
         String defaultSubject = settings.getString("last_subject", "-1");
         String defaultStage = settings.getString("last_stage", "-1");
         Call<List<Olympiad>> call = client.getNextEvents(userClass, defaultSubject, defaultStage);
@@ -72,6 +78,7 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
                 olympiadListView = view.findViewById(R.id.olympiadsList);
                 adapter = new OlympiadListAdapter(getContext(), olympiadList);
                 olympiadListView.setAdapter(adapter);
+                progressBar.setVisibility(View.GONE);
                 olympiadListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -92,6 +99,7 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
             public void onFailure(Call<List<Olympiad>> call, Throwable t) {
                 Toast.makeText(getContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
+                progressBar.setVisibility(View.GONE);
             }
         });
 
@@ -99,8 +107,8 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
         return view;
     }
 
-    public static boolean hasConnection(final Context context)
-    {
+    public static boolean hasConnection(final Context context) {
+        // проверка соединения с сетью
         ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo wifiInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         if (wifiInfo != null && wifiInfo.isConnected())
@@ -122,10 +130,13 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
 
     @Override
     public void applyData(String class_, String subject, String stage) {
+        // обработка нажатия кнопки "ок" в окне выбора фильтров
         if(!hasConnection(getContext())) {
             Toast.makeText(getContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
             return;
         }
+
+        progressBar.setVisibility(View.VISIBLE);
 
         Call<List<Olympiad>> call = client.getNextEvents(class_, subject, stage);
 
@@ -137,12 +148,15 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
                 olympiadListView = view.findViewById(R.id.olympiadsList);
                 adapter = new OlympiadListAdapter(getContext(), olympiadList);
                 olympiadListView.setAdapter(adapter);
+                progressBar.setVisibility(View.GONE);
+
             }
 
             @Override
             public void onFailure(Call<List<Olympiad>> call, Throwable t) {
                 Toast.makeText(getContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
