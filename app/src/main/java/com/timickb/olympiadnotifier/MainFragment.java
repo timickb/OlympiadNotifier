@@ -78,7 +78,7 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
                 olympiadListView = view.findViewById(R.id.olympiadsList);
                 adapter = new OlympiadListAdapter(getContext(), olympiadList);
                 olympiadListView.setAdapter(adapter);
-                progressBar.setVisibility(View.GONE);
+                changeDataStatus(false);
                 olympiadListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -99,7 +99,7 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
             public void onFailure(Call<List<Olympiad>> call, Throwable t) {
                 Toast.makeText(getContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
-                progressBar.setVisibility(View.GONE);
+                changeDataStatus(false);
             }
         });
 
@@ -136,7 +136,7 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        changeDataStatus(true);
 
         Call<List<Olympiad>> call = client.getNextEvents(class_, subject, stage);
 
@@ -149,14 +149,15 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
                 adapter = new OlympiadListAdapter(getContext(), olympiadList);
                 olympiadListView.setAdapter(adapter);
                 progressBar.setVisibility(View.GONE);
-
+                olympiadListView.setVisibility(View.VISIBLE);
+                changeDataStatus(false);
             }
 
             @Override
             public void onFailure(Call<List<Olympiad>> call, Throwable t) {
                 Toast.makeText(getContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
-                progressBar.setVisibility(View.GONE);
+                changeDataStatus(false);
             }
         });
     }
@@ -169,5 +170,15 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
         super.onCreate(bundle);
         ((MainActivity) getActivity()).setActionBarTitle(getActivity().getString(R.string.main_title));
         setRetainInstance(true);
+    }
+
+    private void changeDataStatus(boolean loading) {
+        if(loading) {
+            progressBar.setVisibility(View.VISIBLE);
+            olympiadListView.setVisibility(View.GONE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+            olympiadListView.setVisibility(View.VISIBLE);
+        }
     }
 }

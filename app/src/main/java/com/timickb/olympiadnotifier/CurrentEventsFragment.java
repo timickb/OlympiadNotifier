@@ -94,7 +94,7 @@ public class CurrentEventsFragment extends Fragment implements FiltersPopup.Filt
                 olympiadListView = view.findViewById(R.id.currentList);
                 adapter = new OlympiadListAdapter(getContext(), olympiadList);
                 olympiadListView.setAdapter(adapter);
-                progressBar.setVisibility(View.GONE);
+                changeDataStatus(false);
                 olympiadListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -115,7 +115,7 @@ public class CurrentEventsFragment extends Fragment implements FiltersPopup.Filt
             public void onFailure(Call<List<Olympiad>> call, Throwable t) {
                 Toast.makeText(getContext(), R.string.nothing_found, Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
-                progressBar.setVisibility(View.GONE);
+                changeDataStatus(false);
             }
         });
 
@@ -151,7 +151,7 @@ public class CurrentEventsFragment extends Fragment implements FiltersPopup.Filt
             Toast.makeText(getContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
             return;
         }
-        progressBar.setVisibility(View.VISIBLE);
+        changeDataStatus(true);
 
         Call<List<Olympiad>> call = client.getCurrentEvents(class_, subject, stage);
 
@@ -163,15 +163,25 @@ public class CurrentEventsFragment extends Fragment implements FiltersPopup.Filt
                 olympiadListView = view.findViewById(R.id.currentList);
                 adapter = new OlympiadListAdapter(getContext(), olympiadList);
                 olympiadListView.setAdapter(adapter);
-                progressBar.setVisibility(View.GONE);
+                changeDataStatus(false);
             }
 
             @Override
             public void onFailure(Call<List<Olympiad>> call, Throwable t) {
                 Toast.makeText(getContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
-                progressBar.setVisibility(View.GONE);
+                changeDataStatus(false);
             }
         });
+    }
+
+    private void changeDataStatus(boolean loading) {
+        if(loading) {
+            progressBar.setVisibility(View.VISIBLE);
+            olympiadListView.setVisibility(View.GONE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+            olympiadListView.setVisibility(View.VISIBLE);
+        }
     }
 }
