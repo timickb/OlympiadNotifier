@@ -1,0 +1,143 @@
+<resources>
+    <string name="server_url">http://94.103.83.68/</string>
+
+    <string name="app_name">Olympiad Tracker</string>
+    <string name="app_build">71</string>
+    <string name="app_version">1.0</string>
+    <string name="navigation_drawer_open">Открыть меню</string>
+    <string name="navigation_drawer_close">Закрыть меню</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Настройки</string>
+    <string name="filters">Фильтры</string>
+    <string name="apply">ОК</string>
+    <string name="main_title">Предстоящие события</string>
+    <string name="current_title">Текущие события</string>
+    <string name="favourites">Избранное</string>
+    <string name="settings_title">Настройки</string>
+    <string name="info_title">О приложении</string>
+    <string name="olympiad_title">Об олимпиаде</string>
+    <string name="reference_title">Полезные ресурсы</string>
+    <string name="more_info">Подробнее</string>
+    <string name="create_notify">Создать напоминание для этого события</string>
+    <string name="add_to_fav">Добавить в избранное</string>
+    <string name="added_to_fav">Добавлено в избранное</string>
+    <string name="remove_from_fav">Удалить из избранного</string>
+    <string name="removed_from_fav">Удалено из избранного</string>
+    <string name="settings_class">Класс</string>
+    <string name="settings_subjects">Интересующие предметы</string>
+    <string name="settings_theme">Тема</string>
+    <string name="organizers_header">Организаторы:</string>
+    <string name="site">Официальный сайт:</string>
+    <string name="unknown">Информация незивестна</string>
+    <string name="expired">Просрочено</string>
+    <string name="ends_today">Сегодня последний день!</string>
+    <string name="ends_tomorrow">Завтра последний день!</string>
+
+    <string name="ref_problems_desc">Каталог олимпиадных задач:</string>
+    <string name="ref_rsr_desc">Список перечневых олимпиад:</string>
+    <string name="ref_cbias_desc">Руководство для поступления:</string>
+
+    <string name="ref_problems_link">http://problems.ru/</string>
+    <string name="ref_rsr_link">http://rsr-olymp.ru/</string>
+    <string name="ref_cbias_link">http://abitur.cbias.ru/</string>
+
+    <string name="option_dark_theme">Темная тема</string>
+
+    <string name="feedback_link"><a href="mailto:timikm2002@gmail.com">Обратная связь</a></string>
+    <string name="sources_link"><a href="http://github.com/timickb/OlympiadNotifier">Исходный код</a></string>
+    <string name="api_link"><a href="http://94.103.83.68">API</a></string>
+
+    <string name="all_subj">Все предметы</string>
+    <string name="math_subj">Математика</string>
+    <string name="russian_subj">Русский язык</string>
+    <string name="informatics_subj">Информатика</string>
+    <string name="physics_subj">Физика</string>
+    <string name="chemistry_subj">Химия</string>
+    <string name="biology_subj">Биология</string>
+    <string name="social_subj">Обществознание</string>
+    <string name="literature_subj">Литература</string>
+    <string name="geography_subj">География</string>
+    <string name="foreign_subj">Иностранный язык</string>
+    <string name="art_subj">Искусство</string>
+    <string name="economy_subj">Экономика</string>
+
+    <string name="all_months">Все месяцы</string>
+    <string name="january">Январь</string>
+    <string name="february">Февраль</string>
+    <string name="march">Март</string>
+    <string name="april">Апрель</string>
+    <string name="may">Май</string>
+    <string name="june">Июнь</string>
+    <string name="july">Июль</string>
+    <string name="august">Август</string>
+    <string name="september">Сентябрь</string>
+    <string name="october">Октябрь</string>
+    <string name="november">Ноябрь</string>
+    <string name="december">Декабрь</string>
+
+    <string name="no_internet">Нет подключения к сети</string>
+    <string name="error_occured">Произошла ошибка</string>
+    <string name="nothing_found">Олимпиады не найдены</string>
+
+    <string name="any_stage">Любой этап</string>
+    <string name="selection_stage">Отборочный этап</string>
+    <string name="final_stage">Заключительный этап</string>
+
+    <string-array name="start_fragments">
+        <item>@string/main_title</item>
+        <item>@string/current_title</item>
+        <item>@string/favourites</item>
+    </string-array>
+
+    <string-array name="stages">
+        <item>@string/any_stage</item>
+        <item>@string/selection_stage</item>
+        <item>@string/final_stage</item>
+    </string-array>
+    <string-array name="classes">
+        <item>5 класс</item>
+        <item>6 класс</item>
+        <item>7 класс</item>
+        <item>8 класс</item>
+        <item>9 класс</item>
+        <item>10 класс</item>
+        <item>11 класс</item>
+    </string-array>
+    <string-array name="subjects">
+        <item>@string/all_subj</item>
+        <item>@string/math_subj</item>
+        <item>@string/russian_subj</item>
+        <item>@string/informatics_subj</item>
+        <item>@string/physics_subj</item>
+        <item>@string/chemistry_subj</item>
+        <item>@string/biology_subj</item>
+        <item>@string/social_subj</item>
+        <item>@string/literature_subj</item>
+        <item>@string/geography_subj</item>
+        <item>@string/foreign_subj</item>
+        <item>@string/art_subj</item>
+        <item>@string/economy_subj</item>
+    </string-array>
+    <string-array name="months">
+        <item>@string/all_months</item>
+        <item>@string/january</item>
+        <item>@string/february</item>
+        <item>@string/march</item>
+        <item>@string/april</item>
+        <item>@string/may</item>
+        <item>@string/june</item>
+        <item>@string/july</item>
+        <item>@string/august</item>
+        <item>@string/september</item>
+        <item>@string/october</item>
+        <item>@string/november</item>
+        <item>@string/december</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_olympiad">OlympiadActivity</string>
+
+</resources>

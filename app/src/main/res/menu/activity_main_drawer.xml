@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_main"
+            android:icon="@drawable/ic_next_event"
+            android:title="@string/main_title" />
+        <item
+            android:id="@+id/nav_current"
+            android:icon="@drawable/ic_current_events"
+            android:title="@string/current_title" />
+        <item
+            android:id="@+id/nav_fav"
+            android:icon="@drawable/ic_star_black"
+            android:title="@string/favourites" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="Настройки" />
+        <item
+            android:id="@+id/nav_ref"
+            android:icon="@drawable/ic_plus"
+            android:title="Полезные ресурсы" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_info"
+            android:title="О приложении" />
+    </group>
+
+</menu>
