@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "935245293338-tg4386lu598c44n3rceioj26mooip0al.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.timickb.olympiadnotifier",
+            "certificate_hash": "3e384a7d07efeb2e3d4b9b62283f64dfdf6c518d"
+          }
+        },
+        {
           "client_id": "935245293338-65rfkkgiqnhlb1c21s3a9ivpftdfstt6.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -33,20 +41,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "935245293338-65rfkkgiqnhlb1c21s3a9ivpftdfstt6.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
