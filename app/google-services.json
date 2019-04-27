@@ -1,21 +1,29 @@
 {
   "project_info": {
-    "project_number": "732495268048",
-    "firebase_url": "https://olympiadtracker-904f2.firebaseio.com",
-    "project_id": "olympiadtracker-904f2",
-    "storage_bucket": "olympiadtracker-904f2.appspot.com"
+    "project_number": "935245293338",
+    "firebase_url": "https://olympiadtracker.firebaseio.com",
+    "project_id": "olympiadtracker",
+    "storage_bucket": "olympiadtracker.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:732495268048:android:4724e94287ea79f1",
+        "mobilesdk_app_id": "1:935245293338:android:4724e94287ea79f1",
         "android_client_info": {
           "package_name": "com.timickb.olympiadnotifier"
         }
       },
       "oauth_client": [
         {
-          "client_id": "732495268048-frchbg559hrqmnefucjksq5t4dr05ehl.apps.googleusercontent.com",
+          "client_id": "935245293338-cvhbd7nrhtta02grkki9p10hqr7ng3h9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.timickb.olympiadnotifier",
+            "certificate_hash": "843db79e33574c43d7e5762e3c2234f8df891cbc"
+          }
+        },
+        {
+          "client_id": "935245293338-tg4386lu598c44n3rceioj26mooip0al.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.timickb.olympiadnotifier",
@@ -23,20 +31,20 @@
           }
         },
         {
-          "client_id": "732495268048-semik2bnu2rivjm2226v00dffbifu63f.apps.googleusercontent.com",
+          "client_id": "935245293338-65rfkkgiqnhlb1c21s3a9ivpftdfstt6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA1kZDLvJWkDuG5F9VnYVywFEKwc1ADFYA"
+          "current_key": "AIzaSyB05cuMm9pkJ6t-g_wq3oW4M-CuFj2pflU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "732495268048-semik2bnu2rivjm2226v00dffbifu63f.apps.googleusercontent.com",
+              "client_id": "935245293338-65rfkkgiqnhlb1c21s3a9ivpftdfstt6.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
