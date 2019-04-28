@@ -38,11 +38,11 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_main, container, false);
-        // импортируем настройки пользователя
+
         settings = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
-        // считываем его класс
+
         userClass = settings.getString("class", "7");
-        // инициализируем Retrofit
+
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl(getString(R.string.server_url))
                 .addConverterFactory(GsonConverterFactory.create());
         retrofit = builder.build();
@@ -50,7 +50,6 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
 
         progressBar = view.findViewById(R.id.progressBar);
 
-        // обработка нажатия на кнопку вызова диалогового окна с фильтрами
         filtersOpenBtn = view.findViewById(R.id.filtersOpenBtn);
         filtersOpenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +64,6 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
             }
         });
 
-        // делаем дефолтный запрос к серверу на основе последних фильтров
         String defaultSubject = settings.getString("last_subject", "-1");
         String defaultStage = settings.getString("last_stage", "-1");
         Call<List<Olympiad>> call = client.getNextEvents(userClass, defaultSubject, defaultStage);
@@ -106,7 +104,6 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
     }
 
     public static boolean hasConnection(final Context context) {
-        // проверка соединения с сетью
         ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo wifiInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         if (wifiInfo != null && wifiInfo.isConnected())
@@ -128,7 +125,6 @@ public class MainFragment extends Fragment implements FiltersPopup.FiltersPopupL
 
     @Override
     public void applyData(String class_, String subject, String stage) {
-        // обработка нажатия кнопки "ок" в окне выбора фильтров
         if(!hasConnection(getContext())) {
             Toast.makeText(getContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
             return;

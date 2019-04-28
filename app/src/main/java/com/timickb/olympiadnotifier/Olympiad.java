@@ -28,6 +28,7 @@ public class Olympiad implements Parcelable {
     @Expose
     private String link;
     @SerializedName("stage")
+    @Expose
     private String stage;
     @SerializedName("id")
     @Expose

@@ -114,7 +114,6 @@ public class OlympiadFragment extends Fragment implements View.OnClickListener {
         ArrayList<Integer> favIDs = gson.fromJson(favIDsRaw, type);
         isFav = Tools.intListContains(favIDs, olympiad.getId());
 
-        // button
         favBtn.setOnClickListener(this);
         if(isFav) {
             favBtn.setText(R.string.remove_from_fav);

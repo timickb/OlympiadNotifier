@@ -40,17 +40,6 @@ public class Tools {
         return result;
     }
 
-    public static String removeIdFromFavList(String list, int id) {
-        String[] arr = list.split(",");
-        String result = "";
-        for(int i = 0; i < arr.length; i++) {
-            if(arr[i].equals(Integer.toString(id))) arr[i] = "";
-            result += arr[i];
-            if(i < arr.length-1) result += ",";
-        }
-        return result;
-    }
-
     public static String getStringFromClasses(int [] classesRaw) {
         String result = new String();
         if(classesRaw.length == 1) result = Integer.toString(classesRaw[0]) + " класс";
@@ -66,19 +55,5 @@ public class Tools {
             if (s != subjectsRaw.get(subjectsRaw.size()-1)) subjects += ", ";
         }
         return subjects;
-    }
-
-    public static String getStringFromMonths(String start, String end) {
-        return start + " - " + end;
-    }
-
-    public static String getStringFromOrganizers(List<String> orgs) {
-        String result = new String();
-
-        for(String org: orgs) {
-            result += org;
-            if(orgs.get(orgs.size()-1) != org) result += ", ";
-        }
-        return result;
     }
 }

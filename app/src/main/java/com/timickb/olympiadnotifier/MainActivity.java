@@ -27,24 +27,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.setContentView(R.layout.fragment_main);
         setContentView(R.layout.activity_main);
 
-        // Импорт настроек пользователя
         settings = getSharedPreferences("pref", MODE_PRIVATE);
 
-        // Инициализация элементов навигации
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        // Отображаем нужный фрагмент в зависимости от настроек пользователя
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction;
 
@@ -69,8 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        // Обработка нажатия кнопки возврата в Android
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         FragmentManager mgr = getSupportFragmentManager();
         if (!drawer.isDrawerOpen(GravityCompat.START) && mgr.getBackStackEntryCount() == 0) {
             super.onBackPressed();
@@ -88,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Обработка переходов по пунктам бокового меню
         int id = item.getItemId();
 
         if (id == R.id.nav_main) {
@@ -129,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             transaction.replace(R.id.fragment, newFragment).commit();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

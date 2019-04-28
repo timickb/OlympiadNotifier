@@ -43,12 +43,10 @@ public class FavouritesFragment extends Fragment {
 
         settings = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
 
-        // достаем текущий день и месяц
         Calendar calendar = Calendar.getInstance();
         this.currentDay = calendar.get(Calendar.DAY_OF_MONTH);
         this.currentMonth = calendar.get(Calendar.MONTH)+1;
 
-        // пробуем импортировать избранные пользователем события и отобразить их
         try {
             Gson gson = new Gson();
             String json = settings.getString("fav_list", null);

@@ -81,7 +81,6 @@ public class FiltersPopup extends DialogFragment {
         subjectChooser = view.findViewById(R.id.subjectChooser2);
         stageChooser = view.findViewById(R.id.stageChooser);
 
-        // class spinner handler
         ArrayAdapter<CharSequence> classAdapter = ArrayAdapter.createFromResource(getContext(), R.array.classes, android.R.layout.simple_spinner_item);
         classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         classChooser.setAdapter(classAdapter);
@@ -98,7 +97,6 @@ public class FiltersPopup extends DialogFragment {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        // subject spinner handler
         ArrayAdapter<CharSequence> subjectAdapter = ArrayAdapter.createFromResource(getContext(), R.array.subjects, android.R.layout.simple_spinner_item);
         subjectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         subjectChooser.setAdapter(subjectAdapter);
@@ -133,7 +131,6 @@ public class FiltersPopup extends DialogFragment {
         });
         subjectChooser.setSelection(getPositionBySubject(settings.getString("last_subject", "-1")));
 
-        // stage spinner handler
         ArrayAdapter<CharSequence> stageAdapter = ArrayAdapter.createFromResource(getContext(), R.array.stages, android.R.layout.simple_spinner_item);
         stageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stageChooser.setAdapter(stageAdapter);
