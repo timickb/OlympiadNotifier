@@ -21,8 +21,8 @@ public class MessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-
         Log.d("Notification: ", remoteMessage.getNotification().getBody());
+
 
         generateNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
     }
@@ -55,4 +55,5 @@ public class MessagingService extends FirebaseMessagingService {
     public void onNewToken(String token) {
         Log.d(TAG, "Refreshed token: " + token);
     }
+
 }

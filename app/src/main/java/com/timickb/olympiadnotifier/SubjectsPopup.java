@@ -12,6 +12,11 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class SubjectsPopup extends DialogFragment {
     private CheckBox mathCheckBox;
     private CheckBox infCheckBox;
@@ -26,6 +31,9 @@ public class SubjectsPopup extends DialogFragment {
     private CheckBox artCheckBox;
     private CheckBox economyCheckBox;
     private SharedPreferences settings;
+    private Retrofit retrofit;
+    private API client;
+    private String token, key;
 
     public Dialog onCreateDialog(Bundle bundle) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -40,6 +48,11 @@ public class SubjectsPopup extends DialogFragment {
             public void onClick(DialogInterface dialog, int which) {}});
 
         settings = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+        retrofit = new Retrofit.Builder().baseUrl(getString(R.string.server_url))
+                .addConverterFactory(GsonConverterFactory.create()).build();
+        client = retrofit.create(API.class);
+        token = FirebaseInstanceId.getInstance().getToken();
+        key = "";
 
         mathCheckBox = view.findViewById(R.id.mathCheckBox);
         infCheckBox = view.findViewById(R.id.infCheckBox);
@@ -61,6 +74,7 @@ public class SubjectsPopup extends DialogFragment {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("user_subject_math", isChecked);
                 editor.commit();
+                updateUser("math", isChecked);
             }
         });
         infCheckBox.setChecked(settings.getBoolean("user_subject_inf", false));
@@ -70,6 +84,7 @@ public class SubjectsPopup extends DialogFragment {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("user_subject_inf", isChecked);
                 editor.commit();
+                updateUser("informatics", isChecked);
             }
         });
         rusCheckBox.setChecked(settings.getBoolean("user_subject_rus", false));
@@ -79,6 +94,7 @@ public class SubjectsPopup extends DialogFragment {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("user_subject_rus", isChecked);
                 editor.commit();
+                updateUser("russian", isChecked);
             }
         });
         physicsCheckBox.setChecked(settings.getBoolean("user_subject_physics", false));
@@ -88,6 +104,7 @@ public class SubjectsPopup extends DialogFragment {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("user_subject_physics", isChecked);
                 editor.commit();
+                updateUser("physics", isChecked);
             }
         });
         chemistryCheckBox.setChecked(settings.getBoolean("user_subject_chemistry", false));
@@ -97,6 +114,7 @@ public class SubjectsPopup extends DialogFragment {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("user_subject_chemistry", isChecked);
                 editor.commit();
+                updateUser("chemistry", isChecked);
             }
         });
         biologyCheckBox.setChecked(settings.getBoolean("user_subject_biology", false));
@@ -106,6 +124,7 @@ public class SubjectsPopup extends DialogFragment {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("user_subject_biology", isChecked);
                 editor.commit();
+                updateUser("biology", isChecked);
             }
         });
         socialCheckBox.setChecked(settings.getBoolean("user_subject_social", false));
@@ -115,6 +134,7 @@ public class SubjectsPopup extends DialogFragment {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("user_subject_social", isChecked);
                 editor.commit();
+                updateUser("social", isChecked);
             }
         });
         literatureCheckBox.setChecked(settings.getBoolean("user_subject_literature", false));
@@ -124,6 +144,7 @@ public class SubjectsPopup extends DialogFragment {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("user_subject_literature", isChecked);
                 editor.commit();
+                updateUser("literature", isChecked);
             }
         });
         geographyCheckBox.setChecked(settings.getBoolean("user_subject_geography", false));
@@ -133,6 +154,7 @@ public class SubjectsPopup extends DialogFragment {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("user_subject_geography", isChecked);
                 editor.commit();
+                updateUser("geography", isChecked);
             }
         });
         foreignCheckBox.setChecked(settings.getBoolean("user_subject_foreign", false));
@@ -142,6 +164,7 @@ public class SubjectsPopup extends DialogFragment {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("user_subject_foreign", isChecked);
                 editor.commit();
+                updateUser("foreign", isChecked);
             }
         });
         artCheckBox.setChecked(settings.getBoolean("user_subject_art", false));
@@ -151,6 +174,7 @@ public class SubjectsPopup extends DialogFragment {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("user_subject_art", isChecked);
                 editor.commit();
+                updateUser("art", isChecked);
             }
         });
         economyCheckBox.setChecked(settings.getBoolean("user_subject_economy", false));
@@ -160,9 +184,14 @@ public class SubjectsPopup extends DialogFragment {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("user_subject_economy", isChecked);
                 editor.commit();
+                updateUser("economy", isChecked);
             }
         });
 
         return builder.create();
+    }
+
+    private void updateUser(String subject, boolean isChecked) {
+        client.updateUser(key, token, subject, isChecked);
     }
 }
