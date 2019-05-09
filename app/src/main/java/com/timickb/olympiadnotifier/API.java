@@ -1,7 +1,10 @@
 package com.timickb.olympiadnotifier;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -16,5 +19,5 @@ public interface API {
     Call<List<Olympiad>> getCurrentEvents(@Query("class") String class_, @Query("subject") String subject, @Query("stage") String stage);
 
     @POST("/updateUser")
-    Call<Integer> updateUser(@Body String key, @Body String userToken, @Body String subject, @Body boolean flag);
+    Call<JSONObject> updateUser(@Body UserUpdatePayload payload);
 }

@@ -6,14 +6,25 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -52,7 +63,7 @@ public class SubjectsPopup extends DialogFragment {
                 .addConverterFactory(GsonConverterFactory.create()).build();
         client = retrofit.create(API.class);
         token = FirebaseInstanceId.getInstance().getToken();
-        key = "";
+        key = "decwuiediudsweviuew";
 
         mathCheckBox = view.findViewById(R.id.mathCheckBox);
         infCheckBox = view.findViewById(R.id.infCheckBox);
@@ -192,6 +203,24 @@ public class SubjectsPopup extends DialogFragment {
     }
 
     private void updateUser(String subject, boolean isChecked) {
-        client.updateUser(key, token, subject, isChecked);
+        UserUpdatePayload payload = new UserUpdatePayload(key, token, subject, isChecked);
+        Call<JSONObject> result = client.updateUser(payload);
+        result.enqueue(new Callback<JSONObject>() {
+            @Override
+            public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
+                try {
+                    Log.d("INFO", response.body().getString("result"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONObject> call, Throwable t) {
+                Toast.makeText(getContext(), R.string.error_occured, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 }
