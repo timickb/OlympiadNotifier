@@ -63,7 +63,7 @@ public class SubjectsPopup extends DialogFragment {
                 .addConverterFactory(GsonConverterFactory.create()).build();
         client = retrofit.create(API.class);
         token = FirebaseInstanceId.getInstance().getToken();
-        key = "decwuiediudsweviuew";
+        key = APIAuth.getKey();
 
         mathCheckBox = view.findViewById(R.id.mathCheckBox);
         infCheckBox = view.findViewById(R.id.infCheckBox);
