@@ -35,7 +35,7 @@ public class OlympiadFragment extends Fragment implements View.OnClickListener {
     private Button closeButton;
     private SharedPreferences settings;
     private boolean isFav;
-    private int currentDay, currentMonth;
+    private int currentDay, currentMonth, currentYear;
 
 
     @Override
@@ -46,6 +46,7 @@ public class OlympiadFragment extends Fragment implements View.OnClickListener {
         Calendar calendar = Calendar.getInstance();
         this.currentDay = calendar.get(Calendar.DAY_OF_MONTH);
         this.currentMonth = calendar.get(Calendar.MONTH)+1;
+        this.currentYear = calendar.get(Calendar.YEAR);
 
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("fav_list", "");
@@ -91,7 +92,7 @@ public class OlympiadFragment extends Fragment implements View.OnClickListener {
         String link = olympiad.getLink();
 
         String date = dateStart + " - " + dateEnd;
-        if(Tools.isExpired(dateEnd, currentDay, currentMonth)) {
+        if(Tools.isExpired(dateEnd, currentDay, currentMonth, currentYear)) {
             date = getActivity().getString(R.string.expired);
         } else if(Tools.isToday(dateEnd, currentDay, currentMonth)) {
             date = getActivity().getString(R.string.ends_today);

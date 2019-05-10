@@ -25,7 +25,7 @@ public class FavouritesFragment extends Fragment {
     private ArrayList<Olympiad> olympiadList = new ArrayList<Olympiad>();
     private OlympiadListAdapter adapter;
     private SharedPreferences settings;
-    private int currentDay, currentMonth;
+    private int currentDay, currentMonth, currentYear;
 
     public void onResume(){
         super.onResume();
@@ -46,6 +46,7 @@ public class FavouritesFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         this.currentDay = calendar.get(Calendar.DAY_OF_MONTH);
         this.currentMonth = calendar.get(Calendar.MONTH)+1;
+        this.currentYear = calendar.get(Calendar.YEAR);
 
         try {
             Gson gson = new Gson();
@@ -56,7 +57,7 @@ public class FavouritesFragment extends Fragment {
                 for(int i = 0; i < ids.size(); i++) {
                     json = settings.getString("fav"+ids.get(i), "");
                     Olympiad newOlympiad = gson.fromJson(json, Olympiad.class);
-                    if(Tools.isExpired(newOlympiad.getDateEnd(), currentDay, currentMonth)) {
+                    if(Tools.isExpired(newOlympiad.getDateEnd(), currentDay, currentMonth, currentYear)) {
                         SharedPreferences.Editor editor = settings.edit();
                         editor.remove("fav"+ids.get(i));
                         String favIDsRaw = settings.getString("fav_list", null);

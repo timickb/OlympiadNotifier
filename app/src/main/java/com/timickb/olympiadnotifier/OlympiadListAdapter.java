@@ -12,13 +12,14 @@ import java.util.List;
 public class OlympiadListAdapter extends BaseAdapter {
     private Context mContext;
     private List<Olympiad> mOlympiadList;
-    private int currentDay, currentMonth;
+    private int currentDay, currentMonth, currentYear;
 
 
     public OlympiadListAdapter(Context mContext, List<Olympiad> mOlympiadList) {
         Calendar calendar = Calendar.getInstance();
         this.currentDay = calendar.get(Calendar.DAY_OF_MONTH);
         this.currentMonth = calendar.get(Calendar.MONTH)+1;
+        this.currentYear = calendar.get(Calendar.YEAR);
         this.mContext = mContext;
         this.mOlympiadList = mOlympiadList;
     }
@@ -55,7 +56,7 @@ public class OlympiadListAdapter extends BaseAdapter {
         String dateStart = currentItem.getDateStart();
         String dateEnd = currentItem.getDateEnd();
         String date = dateStart + " - " + dateEnd;
-        if(Tools.isExpired(dateEnd, currentDay, currentMonth)) {
+        if(Tools.isExpired(dateEnd, currentDay, currentMonth, currentYear)) {
             date = mContext.getString(R.string.expired);
         } else if(Tools.isToday(dateEnd, currentDay, currentMonth)) {
             date = mContext.getString(R.string.ends_today);
